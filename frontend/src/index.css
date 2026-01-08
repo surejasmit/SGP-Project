@@ -1,29 +1,146 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #8b4513;
-  --color-primary-light: #a0522d;
-  --color-secondary: #2c1810;
-  --color-accent: #d4a574;
-  --color-cream: #faf3e8;
-  --color-cream-dark: #f0e6d3;
-  --color-text: #3d2914;
-  --color-text-muted: #6b5344;
+  --color-primary: #6366f1;
+  --color-primary-light: #818cf8;
+  --color-primary-dark: #4f46e5;
+  --color-secondary: #0f172a;
+  --color-accent: #06b6d4;
+  --color-cream: #ffffff;
+  --color-cream-dark: #f1f5f9;
+  --color-dark: #0f172a;
+  --color-dark-light: #1e293b;
+  --color-dark-lighter: #334155;
+  --color-text: #0f172a;
+  --color-text-light: #ffffff;
+  --color-text-muted: #64748b;
+  --color-text-muted-light: #cbd5e1;
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.3;
+  letter-spacing: 0;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+p {
+  line-height: 1.8;
+  letter-spacing: 0;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+* {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideLeft {
-  from { opacity: 0; transform: translateX(30px); }
+  from { opacity: 0; transform: translateX(40px); }
   to { opacity: 1; transform: translateX(0); }
 }
 
-.animate-up { animation: slideUp 0.6s ease-out forwards; }
-.animate-left { animation: slideLeft 0.6s ease-out forwards; }
-.delay-1 { animation-delay: 0.1s; opacity: 0; }
-.delay-2 { animation-delay: 0.2s; opacity: 0; }
-.delay-3 { animation-delay: 0.3s; opacity: 0; }
-.delay-4 { animation-delay: 0.4s; opacity: 0; }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-up { 
+  animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards; 
+}
+.animate-left { 
+  animation: slideLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards; 
+}
+.animate-fade { 
+  animation: fadeIn 0.6s ease-out forwards; 
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+.delay-1 { animation-delay: 0.15s; opacity: 0; }
+.delay-2 { animation-delay: 0.3s; opacity: 0; }
+.delay-3 { animation-delay: 0.45s; opacity: 0; }
+.delay-4 { animation-delay: 0.6s; opacity: 0; }
+
+.gradient-bg {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-size: 200% 200%;
+  animation: gradient 15s ease infinite;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card-hover {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.smooth-transition {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.text-spacing {
+  word-spacing: 0.05em;
+  letter-spacing: 0.01em;
+}
+
+/* Ensure text doesn't shift */
+input, textarea, select {
+  text-align: left;
+}
+
+input::placeholder {
+  text-align: left;
+}
+
+label {
+  text-align: left;
+}

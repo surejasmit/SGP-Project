@@ -1,52 +1,50 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import DeviceItem from '../components/DeviceItem'
 
-// Lab Detail Page - shows grid of devices (lights, fans & computers)
+// Lab Detail Page - shows grid of devices (lights, fans & computers) from backend
 function LabDetail() {
   const { labId } = useParams()
   const navigate = useNavigate()
+  const [devices, setDevices] = useState({ lights: [], fans: [], computers: [] })
+  const [deviceState, setDeviceState] = useState({})
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
 
-  // Define devices for this lab
-  const lights = [
-    { id: 1, type: 'light', name: 'Light 1' },
-    { id: 2, type: 'light', name: 'Light 2' },
-    { id: 3, type: 'light', name: 'Light 3' },
-    { id: 4, type: 'light', name: 'Light 4' },
-    { id: 5, type: 'light', name: 'Light 5' },
-    { id: 6, type: 'light', name: 'Light 6' },
-    { id: 7, type: 'light', name: 'Light 7' },
-    { id: 8, type: 'light', name: 'Light 8' },
-  ]
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/labs/${labId}/devices/grouped`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          setDevices(data.devices)
+          // Initialize device states
+          const states = {}
+          Object.values(data.devices).flat().forEach(device => {
+            states[device.id] = device.is_on === 1
+          })
+          setDeviceState(states)
+        } else {
+          setError('Failed to load devices')
+        }
+      })
+      .catch(() => setError('Server error'))
+      .finally(() => setLoading(false))
+  }, [labId])
 
-  const fans = [
-    { id: 9, type: 'fan', name: 'Fan 1' },
-    { id: 10, type: 'fan', name: 'Fan 2' },
-    { id: 11, type: 'fan', name: 'Fan 3' },
-  ]
-
-  const computers = [
-    { id: 12, type: 'computer', name: 'PC 1' },
-    { id: 13, type: 'computer', name: 'PC 2' },
-    { id: 14, type: 'computer', name: 'PC 3' },
-    { id: 15, type: 'computer', name: 'PC 4' },
-    { id: 16, type: 'computer', name: 'PC 5' },
-    { id: 17, type: 'computer', name: 'PC 6' },
-    { id: 18, type: 'computer', name: 'PC 7' },
-    { id: 19, type: 'computer', name: 'PC 8' },
-  ]
-
-  const allDevices = [...lights, ...fans, ...computers]
-
-  // Track state for each device
-  const [deviceState, setDeviceState] = useState(
-    allDevices.reduce((acc, device) => ({ ...acc, [device.id]: true }), {})
-  )
-
-  const toggleDevice = (deviceId) => {
-    setDeviceState(prev => ({ ...prev, [deviceId]: !prev[deviceId] }))
+  const toggleDevice = async (deviceId) => {
+    try {
+      const res = await fetch(`http://localhost:5000/api/devices/${deviceId}/toggle`, {
+        method: 'PATCH'
+      })
+      const data = await res.json()
+      if (data.success) {
+        setDeviceState(prev => ({ ...prev, [deviceId]: data.device.is_on === 1 }))
+      }
+    } catch (err) {
+      console.error('Failed to toggle device:', err)
+    }
   }
 
   // Section component
@@ -78,11 +76,16 @@ function LabDetail() {
           <p className="text-text-muted text-sm">Click a device to toggle ON/OFF</p>
         </div>
 
-        <div className="animate-up delay-2">
-          <DeviceSection title="Lights" icon="💡" devices={lights} />
-          <DeviceSection title="Fans" icon="🌀" devices={fans} />
-          <DeviceSection title="Computers" icon="💻" devices={computers} />
-        </div>
+        {loading && <div className="text-center text-text-muted">Loading devices...</div>}
+        {error && <div className="text-center text-red-600 bg-red-50 border border-red-200 rounded p-2 mb-4">{error}</div>}
+        
+        {!loading && !error && (
+          <div className="animate-up delay-2">
+            <DeviceSection title="Lights" icon="💡" devices={devices.lights} />
+            <DeviceSection title="Fans" icon="🌀" devices={devices.fans} />
+            <DeviceSection title="Computers" icon="💻" devices={devices.computers} />
+          </div>
+        )}
 
         <button 
           onClick={() => navigate('/labs')} 

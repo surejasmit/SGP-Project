@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import MainPage from './pages/MainPage'
 import AdminLogin from './pages/AdminLogin'
 import AdminSignup from './pages/AdminSignup'
+import AdminDashboard from './pages/AdminDashboard'
 import UserLogin from './pages/UserLogin'
 import UserSignup from './pages/UserSignup'
 import LabSelection from './pages/LabSelection'
@@ -13,6 +14,7 @@ function App() {
       <Route path="/" element={<MainPage />} />
       <Route path="/admin-login" element={<AdminLogin />} />
       <Route path="/admin-signup" element={<AdminSignup />} />
+      <Route path="/admin-dashboard" element={<AdminDashboard />} />
       <Route path="/user-login" element={<UserLogin />} />
       <Route path="/user-signup" element={<UserSignup />} />
       <Route path="/labs" element={<LabSelection />} />

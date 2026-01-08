@@ -1,0 +1,1627 @@
+{
+  "admins": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "$2a$10$QepyuJfFtWY49apAR1UujOFGra3Mg6yTNqhf1C7lzbzrJQTABolQi",
+      "created_at": "2026-01-07T16:05:57.516Z"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "smitsureaj",
+      "email": "smitsureja472007@gmail.com",
+      "password": "$2a$10$.HK9jh8UDzLJs4Slrtb7Ruq5EMIyfohEyXbz.E/S0/pRzvpflsEwe",
+      "created_at": "2026-01-07T16:06:33.351Z"
+    },
+    {
+      "id": 2,
+      "name": "sarthak",
+      "email": "sartkan34@gmail.com",
+      "password": "$2a$10$OFyk5bG8mvBuVYxjFbcEoeYcdAOpKXFrNd95tcTNOENceOeVeugYK",
+      "created_at": "2026-01-07T16:10:16.992Z"
+    },
+    {
+      "id": 3,
+      "name": "sarthafda",
+      "email": "sarthak@gmail.com",
+      "password": "$2a$10$I6uO6UG3oYWYV9p13FjUUenqjas9PVAh/6Gyk3ZyfRY/vT3bRfzAq",
+      "created_at": "2026-01-07T16:10:41.146Z"
+    }
+  ],
+  "labs": [
+    {
+      "id": 1,
+      "lab_number": 1,
+      "name": "Lab 1",
+      "description": "Digital Electronics Laboratory 1",
+      "created_at": "2026-01-07T16:05:57.520Z"
+    },
+    {
+      "id": 2,
+      "lab_number": 2,
+      "name": "Lab 2",
+      "description": "Digital Electronics Laboratory 2",
+      "created_at": "2026-01-07T16:05:57.539Z"
+    },
+    {
+      "id": 3,
+      "lab_number": 3,
+      "name": "Lab 3",
+      "description": "Digital Electronics Laboratory 3",
+      "created_at": "2026-01-07T16:05:57.554Z"
+    },
+    {
+      "id": 4,
+      "lab_number": 4,
+      "name": "Lab 4",
+      "description": "Digital Electronics Laboratory 4",
+      "created_at": "2026-01-07T16:05:57.577Z"
+    },
+    {
+      "id": 5,
+      "lab_number": 5,
+      "name": "Lab 5",
+      "description": "Digital Electronics Laboratory 5",
+      "created_at": "2026-01-07T16:05:57.596Z"
+    },
+    {
+      "id": 6,
+      "lab_number": 6,
+      "name": "Lab 6",
+      "description": "Digital Electronics Laboratory 6",
+      "created_at": "2026-01-07T16:05:57.619Z"
+    },
+    {
+      "id": 7,
+      "lab_number": 7,
+      "name": "Lab 7",
+      "description": "Digital Electronics Laboratory 7",
+      "created_at": "2026-01-07T16:05:57.642Z"
+    },
+    {
+      "id": 8,
+      "lab_number": 8,
+      "name": "Lab 8",
+      "description": "Digital Electronics Laboratory 8",
+      "created_at": "2026-01-07T16:05:57.663Z"
+    },
+    {
+      "id": 9,
+      "lab_number": 9,
+      "name": "Lab 9",
+      "description": "Digital Electronics Laboratory 9",
+      "created_at": "2026-01-07T16:05:57.685Z"
+    },
+    {
+      "id": 10,
+      "lab_number": 10,
+      "name": "Lab 10",
+      "description": "Digital Electronics Laboratory 10",
+      "created_at": "2026-01-07T16:05:57.709Z"
+    }
+  ],
+  "devices": [
+    {
+      "id": 1,
+      "lab_id": 1,
+      "name": "Light 1",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.521Z"
+    },
+    {
+      "id": 2,
+      "lab_id": 1,
+      "name": "Light 2",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.522Z"
+    },
+    {
+      "id": 3,
+      "lab_id": 1,
+      "name": "Light 3",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.524Z"
+    },
+    {
+      "id": 4,
+      "lab_id": 1,
+      "name": "Light 4",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.526Z"
+    },
+    {
+      "id": 5,
+      "lab_id": 1,
+      "name": "Light 5",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.527Z"
+    },
+    {
+      "id": 6,
+      "lab_id": 1,
+      "name": "Light 6",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.528Z"
+    },
+    {
+      "id": 7,
+      "lab_id": 1,
+      "name": "Light 7",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.528Z"
+    },
+    {
+      "id": 8,
+      "lab_id": 1,
+      "name": "Light 8",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.529Z"
+    },
+    {
+      "id": 9,
+      "lab_id": 1,
+      "name": "Fan 1",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.529Z"
+    },
+    {
+      "id": 10,
+      "lab_id": 1,
+      "name": "Fan 2",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.530Z"
+    },
+    {
+      "id": 11,
+      "lab_id": 1,
+      "name": "Fan 3",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.530Z"
+    },
+    {
+      "id": 12,
+      "lab_id": 1,
+      "name": "PC 1",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.531Z"
+    },
+    {
+      "id": 13,
+      "lab_id": 1,
+      "name": "PC 2",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.532Z"
+    },
+    {
+      "id": 14,
+      "lab_id": 1,
+      "name": "PC 3",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.533Z"
+    },
+    {
+      "id": 15,
+      "lab_id": 1,
+      "name": "PC 4",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.533Z"
+    },
+    {
+      "id": 16,
+      "lab_id": 1,
+      "name": "PC 5",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.534Z"
+    },
+    {
+      "id": 17,
+      "lab_id": 1,
+      "name": "PC 6",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.535Z"
+    },
+    {
+      "id": 18,
+      "lab_id": 1,
+      "name": "PC 7",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.536Z"
+    },
+    {
+      "id": 19,
+      "lab_id": 1,
+      "name": "PC 8",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.537Z"
+    },
+    {
+      "id": 20,
+      "lab_id": 2,
+      "name": "Light 1",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.540Z"
+    },
+    {
+      "id": 21,
+      "lab_id": 2,
+      "name": "Light 2",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.542Z"
+    },
+    {
+      "id": 22,
+      "lab_id": 2,
+      "name": "Light 3",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.543Z"
+    },
+    {
+      "id": 23,
+      "lab_id": 2,
+      "name": "Light 4",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.544Z"
+    },
+    {
+      "id": 24,
+      "lab_id": 2,
+      "name": "Light 5",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.544Z"
+    },
+    {
+      "id": 25,
+      "lab_id": 2,
+      "name": "Light 6",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.545Z"
+    },
+    {
+      "id": 26,
+      "lab_id": 2,
+      "name": "Light 7",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.545Z"
+    },
+    {
+      "id": 27,
+      "lab_id": 2,
+      "name": "Light 8",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.546Z"
+    },
+    {
+      "id": 28,
+      "lab_id": 2,
+      "name": "Fan 1",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.546Z"
+    },
+    {
+      "id": 29,
+      "lab_id": 2,
+      "name": "Fan 2",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.547Z"
+    },
+    {
+      "id": 30,
+      "lab_id": 2,
+      "name": "Fan 3",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.548Z"
+    },
+    {
+      "id": 31,
+      "lab_id": 2,
+      "name": "PC 1",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.548Z"
+    },
+    {
+      "id": 32,
+      "lab_id": 2,
+      "name": "PC 2",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.549Z"
+    },
+    {
+      "id": 33,
+      "lab_id": 2,
+      "name": "PC 3",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.550Z"
+    },
+    {
+      "id": 34,
+      "lab_id": 2,
+      "name": "PC 4",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.550Z"
+    },
+    {
+      "id": 35,
+      "lab_id": 2,
+      "name": "PC 5",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.551Z"
+    },
+    {
+      "id": 36,
+      "lab_id": 2,
+      "name": "PC 6",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.551Z"
+    },
+    {
+      "id": 37,
+      "lab_id": 2,
+      "name": "PC 7",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.552Z"
+    },
+    {
+      "id": 38,
+      "lab_id": 2,
+      "name": "PC 8",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.553Z"
+    },
+    {
+      "id": 39,
+      "lab_id": 3,
+      "name": "Light 1",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.556Z"
+    },
+    {
+      "id": 40,
+      "lab_id": 3,
+      "name": "Light 2",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.557Z"
+    },
+    {
+      "id": 41,
+      "lab_id": 3,
+      "name": "Light 3",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.559Z"
+    },
+    {
+      "id": 42,
+      "lab_id": 3,
+      "name": "Light 4",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.561Z"
+    },
+    {
+      "id": 43,
+      "lab_id": 3,
+      "name": "Light 5",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.562Z"
+    },
+    {
+      "id": 44,
+      "lab_id": 3,
+      "name": "Light 6",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.563Z"
+    },
+    {
+      "id": 45,
+      "lab_id": 3,
+      "name": "Light 7",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.563Z"
+    },
+    {
+      "id": 46,
+      "lab_id": 3,
+      "name": "Light 8",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.564Z"
+    },
+    {
+      "id": 47,
+      "lab_id": 3,
+      "name": "Fan 1",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.565Z"
+    },
+    {
+      "id": 48,
+      "lab_id": 3,
+      "name": "Fan 2",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.566Z"
+    },
+    {
+      "id": 49,
+      "lab_id": 3,
+      "name": "Fan 3",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.566Z"
+    },
+    {
+      "id": 50,
+      "lab_id": 3,
+      "name": "PC 1",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.567Z"
+    },
+    {
+      "id": 51,
+      "lab_id": 3,
+      "name": "PC 2",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.568Z"
+    },
+    {
+      "id": 52,
+      "lab_id": 3,
+      "name": "PC 3",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.568Z"
+    },
+    {
+      "id": 53,
+      "lab_id": 3,
+      "name": "PC 4",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.569Z"
+    },
+    {
+      "id": 54,
+      "lab_id": 3,
+      "name": "PC 5",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.569Z"
+    },
+    {
+      "id": 55,
+      "lab_id": 3,
+      "name": "PC 6",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.570Z"
+    },
+    {
+      "id": 56,
+      "lab_id": 3,
+      "name": "PC 7",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.572Z"
+    },
+    {
+      "id": 57,
+      "lab_id": 3,
+      "name": "PC 8",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.573Z"
+    },
+    {
+      "id": 58,
+      "lab_id": 4,
+      "name": "Light 1",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.577Z"
+    },
+    {
+      "id": 59,
+      "lab_id": 4,
+      "name": "Light 2",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.578Z"
+    },
+    {
+      "id": 60,
+      "lab_id": 4,
+      "name": "Light 3",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.579Z"
+    },
+    {
+      "id": 61,
+      "lab_id": 4,
+      "name": "Light 4",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.579Z"
+    },
+    {
+      "id": 62,
+      "lab_id": 4,
+      "name": "Light 5",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.580Z"
+    },
+    {
+      "id": 63,
+      "lab_id": 4,
+      "name": "Light 6",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.581Z"
+    },
+    {
+      "id": 64,
+      "lab_id": 4,
+      "name": "Light 7",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.582Z"
+    },
+    {
+      "id": 65,
+      "lab_id": 4,
+      "name": "Light 8",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.582Z"
+    },
+    {
+      "id": 66,
+      "lab_id": 4,
+      "name": "Fan 1",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.583Z"
+    },
+    {
+      "id": 67,
+      "lab_id": 4,
+      "name": "Fan 2",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.584Z"
+    },
+    {
+      "id": 68,
+      "lab_id": 4,
+      "name": "Fan 3",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.584Z"
+    },
+    {
+      "id": 69,
+      "lab_id": 4,
+      "name": "PC 1",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.585Z"
+    },
+    {
+      "id": 70,
+      "lab_id": 4,
+      "name": "PC 2",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.585Z"
+    },
+    {
+      "id": 71,
+      "lab_id": 4,
+      "name": "PC 3",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.586Z"
+    },
+    {
+      "id": 72,
+      "lab_id": 4,
+      "name": "PC 4",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.587Z"
+    },
+    {
+      "id": 73,
+      "lab_id": 4,
+      "name": "PC 5",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.588Z"
+    },
+    {
+      "id": 74,
+      "lab_id": 4,
+      "name": "PC 6",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.591Z"
+    },
+    {
+      "id": 75,
+      "lab_id": 4,
+      "name": "PC 7",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.593Z"
+    },
+    {
+      "id": 76,
+      "lab_id": 4,
+      "name": "PC 8",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.595Z"
+    },
+    {
+      "id": 77,
+      "lab_id": 5,
+      "name": "Light 1",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.597Z"
+    },
+    {
+      "id": 78,
+      "lab_id": 5,
+      "name": "Light 2",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.598Z"
+    },
+    {
+      "id": 79,
+      "lab_id": 5,
+      "name": "Light 3",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.599Z"
+    },
+    {
+      "id": 80,
+      "lab_id": 5,
+      "name": "Light 4",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.601Z"
+    },
+    {
+      "id": 81,
+      "lab_id": 5,
+      "name": "Light 5",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.601Z"
+    },
+    {
+      "id": 82,
+      "lab_id": 5,
+      "name": "Light 6",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.602Z"
+    },
+    {
+      "id": 83,
+      "lab_id": 5,
+      "name": "Light 7",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.605Z"
+    },
+    {
+      "id": 84,
+      "lab_id": 5,
+      "name": "Light 8",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.606Z"
+    },
+    {
+      "id": 85,
+      "lab_id": 5,
+      "name": "Fan 1",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.610Z"
+    },
+    {
+      "id": 86,
+      "lab_id": 5,
+      "name": "Fan 2",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.612Z"
+    },
+    {
+      "id": 87,
+      "lab_id": 5,
+      "name": "Fan 3",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.612Z"
+    },
+    {
+      "id": 88,
+      "lab_id": 5,
+      "name": "PC 1",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.614Z"
+    },
+    {
+      "id": 89,
+      "lab_id": 5,
+      "name": "PC 2",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.614Z"
+    },
+    {
+      "id": 90,
+      "lab_id": 5,
+      "name": "PC 3",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.615Z"
+    },
+    {
+      "id": 91,
+      "lab_id": 5,
+      "name": "PC 4",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.615Z"
+    },
+    {
+      "id": 92,
+      "lab_id": 5,
+      "name": "PC 5",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.616Z"
+    },
+    {
+      "id": 93,
+      "lab_id": 5,
+      "name": "PC 6",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.616Z"
+    },
+    {
+      "id": 94,
+      "lab_id": 5,
+      "name": "PC 7",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.617Z"
+    },
+    {
+      "id": 95,
+      "lab_id": 5,
+      "name": "PC 8",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.618Z"
+    },
+    {
+      "id": 96,
+      "lab_id": 6,
+      "name": "Light 1",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.620Z"
+    },
+    {
+      "id": 97,
+      "lab_id": 6,
+      "name": "Light 2",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.621Z"
+    },
+    {
+      "id": 98,
+      "lab_id": 6,
+      "name": "Light 3",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.621Z"
+    },
+    {
+      "id": 99,
+      "lab_id": 6,
+      "name": "Light 4",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.625Z"
+    },
+    {
+      "id": 100,
+      "lab_id": 6,
+      "name": "Light 5",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.627Z"
+    },
+    {
+      "id": 101,
+      "lab_id": 6,
+      "name": "Light 6",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.629Z"
+    },
+    {
+      "id": 102,
+      "lab_id": 6,
+      "name": "Light 7",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.630Z"
+    },
+    {
+      "id": 103,
+      "lab_id": 6,
+      "name": "Light 8",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.631Z"
+    },
+    {
+      "id": 104,
+      "lab_id": 6,
+      "name": "Fan 1",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.631Z"
+    },
+    {
+      "id": 105,
+      "lab_id": 6,
+      "name": "Fan 2",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.632Z"
+    },
+    {
+      "id": 106,
+      "lab_id": 6,
+      "name": "Fan 3",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.633Z"
+    },
+    {
+      "id": 107,
+      "lab_id": 6,
+      "name": "PC 1",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.633Z"
+    },
+    {
+      "id": 108,
+      "lab_id": 6,
+      "name": "PC 2",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.634Z"
+    },
+    {
+      "id": 109,
+      "lab_id": 6,
+      "name": "PC 3",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.635Z"
+    },
+    {
+      "id": 110,
+      "lab_id": 6,
+      "name": "PC 4",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.635Z"
+    },
+    {
+      "id": 111,
+      "lab_id": 6,
+      "name": "PC 5",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.637Z"
+    },
+    {
+      "id": 112,
+      "lab_id": 6,
+      "name": "PC 6",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.637Z"
+    },
+    {
+      "id": 113,
+      "lab_id": 6,
+      "name": "PC 7",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.638Z"
+    },
+    {
+      "id": 114,
+      "lab_id": 6,
+      "name": "PC 8",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.640Z"
+    },
+    {
+      "id": 115,
+      "lab_id": 7,
+      "name": "Light 1",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.644Z"
+    },
+    {
+      "id": 116,
+      "lab_id": 7,
+      "name": "Light 2",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.645Z"
+    },
+    {
+      "id": 117,
+      "lab_id": 7,
+      "name": "Light 3",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.645Z"
+    },
+    {
+      "id": 118,
+      "lab_id": 7,
+      "name": "Light 4",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.646Z"
+    },
+    {
+      "id": 119,
+      "lab_id": 7,
+      "name": "Light 5",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.647Z"
+    },
+    {
+      "id": 120,
+      "lab_id": 7,
+      "name": "Light 6",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.647Z"
+    },
+    {
+      "id": 121,
+      "lab_id": 7,
+      "name": "Light 7",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.648Z"
+    },
+    {
+      "id": 122,
+      "lab_id": 7,
+      "name": "Light 8",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.649Z"
+    },
+    {
+      "id": 123,
+      "lab_id": 7,
+      "name": "Fan 1",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.649Z"
+    },
+    {
+      "id": 124,
+      "lab_id": 7,
+      "name": "Fan 2",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.650Z"
+    },
+    {
+      "id": 125,
+      "lab_id": 7,
+      "name": "Fan 3",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.651Z"
+    },
+    {
+      "id": 126,
+      "lab_id": 7,
+      "name": "PC 1",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.651Z"
+    },
+    {
+      "id": 127,
+      "lab_id": 7,
+      "name": "PC 2",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.652Z"
+    },
+    {
+      "id": 128,
+      "lab_id": 7,
+      "name": "PC 3",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.653Z"
+    },
+    {
+      "id": 129,
+      "lab_id": 7,
+      "name": "PC 4",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.653Z"
+    },
+    {
+      "id": 130,
+      "lab_id": 7,
+      "name": "PC 5",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.654Z"
+    },
+    {
+      "id": 131,
+      "lab_id": 7,
+      "name": "PC 6",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.655Z"
+    },
+    {
+      "id": 132,
+      "lab_id": 7,
+      "name": "PC 7",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.659Z"
+    },
+    {
+      "id": 133,
+      "lab_id": 7,
+      "name": "PC 8",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.661Z"
+    },
+    {
+      "id": 134,
+      "lab_id": 8,
+      "name": "Light 1",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.663Z"
+    },
+    {
+      "id": 135,
+      "lab_id": 8,
+      "name": "Light 2",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.664Z"
+    },
+    {
+      "id": 136,
+      "lab_id": 8,
+      "name": "Light 3",
+      "type": "light",
+      "is_on": 0,
+      "created_at": "2026-01-07T16:05:57.665Z"
+    },
+    {
+      "id": 137,
+      "lab_id": 8,
+      "name": "Light 4",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.665Z"
+    },
+    {
+      "id": 138,
+      "lab_id": 8,
+      "name": "Light 5",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.667Z"
+    },
+    {
+      "id": 139,
+      "lab_id": 8,
+      "name": "Light 6",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.668Z"
+    },
+    {
+      "id": 140,
+      "lab_id": 8,
+      "name": "Light 7",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.669Z"
+    },
+    {
+      "id": 141,
+      "lab_id": 8,
+      "name": "Light 8",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.669Z"
+    },
+    {
+      "id": 142,
+      "lab_id": 8,
+      "name": "Fan 1",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.670Z"
+    },
+    {
+      "id": 143,
+      "lab_id": 8,
+      "name": "Fan 2",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.670Z"
+    },
+    {
+      "id": 144,
+      "lab_id": 8,
+      "name": "Fan 3",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.671Z"
+    },
+    {
+      "id": 145,
+      "lab_id": 8,
+      "name": "PC 1",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.675Z"
+    },
+    {
+      "id": 146,
+      "lab_id": 8,
+      "name": "PC 2",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.678Z"
+    },
+    {
+      "id": 147,
+      "lab_id": 8,
+      "name": "PC 3",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.680Z"
+    },
+    {
+      "id": 148,
+      "lab_id": 8,
+      "name": "PC 4",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.680Z"
+    },
+    {
+      "id": 149,
+      "lab_id": 8,
+      "name": "PC 5",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.682Z"
+    },
+    {
+      "id": 150,
+      "lab_id": 8,
+      "name": "PC 6",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.682Z"
+    },
+    {
+      "id": 151,
+      "lab_id": 8,
+      "name": "PC 7",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.683Z"
+    },
+    {
+      "id": 152,
+      "lab_id": 8,
+      "name": "PC 8",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.684Z"
+    },
+    {
+      "id": 153,
+      "lab_id": 9,
+      "name": "Light 1",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.686Z"
+    },
+    {
+      "id": 154,
+      "lab_id": 9,
+      "name": "Light 2",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.686Z"
+    },
+    {
+      "id": 155,
+      "lab_id": 9,
+      "name": "Light 3",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.687Z"
+    },
+    {
+      "id": 156,
+      "lab_id": 9,
+      "name": "Light 4",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.691Z"
+    },
+    {
+      "id": 157,
+      "lab_id": 9,
+      "name": "Light 5",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.692Z"
+    },
+    {
+      "id": 158,
+      "lab_id": 9,
+      "name": "Light 6",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.694Z"
+    },
+    {
+      "id": 159,
+      "lab_id": 9,
+      "name": "Light 7",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.696Z"
+    },
+    {
+      "id": 160,
+      "lab_id": 9,
+      "name": "Light 8",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.697Z"
+    },
+    {
+      "id": 161,
+      "lab_id": 9,
+      "name": "Fan 1",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.697Z"
+    },
+    {
+      "id": 162,
+      "lab_id": 9,
+      "name": "Fan 2",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.698Z"
+    },
+    {
+      "id": 163,
+      "lab_id": 9,
+      "name": "Fan 3",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.699Z"
+    },
+    {
+      "id": 164,
+      "lab_id": 9,
+      "name": "PC 1",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.700Z"
+    },
+    {
+      "id": 165,
+      "lab_id": 9,
+      "name": "PC 2",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.701Z"
+    },
+    {
+      "id": 166,
+      "lab_id": 9,
+      "name": "PC 3",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.701Z"
+    },
+    {
+      "id": 167,
+      "lab_id": 9,
+      "name": "PC 4",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.702Z"
+    },
+    {
+      "id": 168,
+      "lab_id": 9,
+      "name": "PC 5",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.703Z"
+    },
+    {
+      "id": 169,
+      "lab_id": 9,
+      "name": "PC 6",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.705Z"
+    },
+    {
+      "id": 170,
+      "lab_id": 9,
+      "name": "PC 7",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.706Z"
+    },
+    {
+      "id": 171,
+      "lab_id": 9,
+      "name": "PC 8",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.708Z"
+    },
+    {
+      "id": 172,
+      "lab_id": 10,
+      "name": "Light 1",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.709Z"
+    },
+    {
+      "id": 173,
+      "lab_id": 10,
+      "name": "Light 2",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.710Z"
+    },
+    {
+      "id": 174,
+      "lab_id": 10,
+      "name": "Light 3",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.711Z"
+    },
+    {
+      "id": 175,
+      "lab_id": 10,
+      "name": "Light 4",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.712Z"
+    },
+    {
+      "id": 176,
+      "lab_id": 10,
+      "name": "Light 5",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.713Z"
+    },
+    {
+      "id": 177,
+      "lab_id": 10,
+      "name": "Light 6",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.714Z"
+    },
+    {
+      "id": 178,
+      "lab_id": 10,
+      "name": "Light 7",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.715Z"
+    },
+    {
+      "id": 179,
+      "lab_id": 10,
+      "name": "Light 8",
+      "type": "light",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.716Z"
+    },
+    {
+      "id": 180,
+      "lab_id": 10,
+      "name": "Fan 1",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.717Z"
+    },
+    {
+      "id": 181,
+      "lab_id": 10,
+      "name": "Fan 2",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.718Z"
+    },
+    {
+      "id": 182,
+      "lab_id": 10,
+      "name": "Fan 3",
+      "type": "fan",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.718Z"
+    },
+    {
+      "id": 183,
+      "lab_id": 10,
+      "name": "PC 1",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.719Z"
+    },
+    {
+      "id": 184,
+      "lab_id": 10,
+      "name": "PC 2",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.720Z"
+    },
+    {
+      "id": 185,
+      "lab_id": 10,
+      "name": "PC 3",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.722Z"
+    },
+    {
+      "id": 186,
+      "lab_id": 10,
+      "name": "PC 4",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.725Z"
+    },
+    {
+      "id": 187,
+      "lab_id": 10,
+      "name": "PC 5",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.727Z"
+    },
+    {
+      "id": 188,
+      "lab_id": 10,
+      "name": "PC 6",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.728Z"
+    },
+    {
+      "id": 189,
+      "lab_id": 10,
+      "name": "PC 7",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.729Z"
+    },
+    {
+      "id": 190,
+      "lab_id": 10,
+      "name": "PC 8",
+      "type": "computer",
+      "is_on": 1,
+      "created_at": "2026-01-07T16:05:57.730Z"
+    }
+  ]
+}
