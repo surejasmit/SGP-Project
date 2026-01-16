@@ -34,7 +34,7 @@ function MainPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-dark">
+    <div className="min-h-screen flex flex-col bg-dark" style={{ minHeight: '100vh', backgroundColor: '#0f172a', color: '#ffffff' }}>
       <Header isLoggedIn={isLoggedIn} adminName={adminName} onLogout={handleLogout} />
       
       <main className="flex-1">

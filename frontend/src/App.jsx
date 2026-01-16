@@ -7,11 +7,13 @@ import UserLogin from './pages/UserLogin'
 import UserSignup from './pages/UserSignup'
 import LabSelection from './pages/LabSelection'
 import LabDetail from './pages/LabDetail'
+import TestPage from './TestPage'
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
+      <Route path="/test" element={<TestPage />} />
       <Route path="/admin-login" element={<AdminLogin />} />
       <Route path="/admin-signup" element={<AdminSignup />} />
       <Route path="/admin-dashboard" element={<AdminDashboard />} />

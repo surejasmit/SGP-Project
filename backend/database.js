@@ -1,85 +1,48 @@
-const fs = require('fs');
-const path = require('path');
+const Info = require('./models/Info');
+const Lab = require('./models/Lab');
+const Device = require('./models/Device');
 
-const DB_FILE = path.join(__dirname, 'database.json');
-
-// Initialize database structure
-function initDB() {
-  if (!fs.existsSync(DB_FILE)) {
-    const initialData = {
-      admins: [],
-      users: [],
-      labs: [],
-      devices: []
-    };
-    fs.writeFileSync(DB_FILE, JSON.stringify(initialData, null, 2));
-  }
-}
-
-// Read database
-function readDB() {
-  initDB();
-  const data = fs.readFileSync(DB_FILE, 'utf8');
-  return JSON.parse(data);
-}
-
-// Write database
-function writeDB(data) {
-  fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
-}
-
-// Database operations
+// Database operations using MongoDB
 const db = {
-  // Admins
-  getAdmin: (username) => {
-    const data = readDB();
-    return data.admins.find(a => a.username === username);
+  // Admins - stored in Info collection with type='admin'
+  getAdmin: async (username) => {
+    return await Info.findOne({ type: 'admin', username });
   },
   
-  createAdmin: (username, password) => {
-    const data = readDB();
-    const id = data.admins.length > 0 ? Math.max(...data.admins.map(a => a.id)) + 1 : 1;
-    const admin = {
-      id,
+  createAdmin: async (username, password) => {
+    const admin = new Info({
+      type: 'admin',
       username,
       password,
-      created_at: new Date().toISOString()
-    };
-    data.admins.push(admin);
-    writeDB(data);
-    return admin;
+      created_at: new Date()
+    });
+    return await admin.save();
   },
   
-  // Users
-  getUser: (email) => {
-    const data = readDB();
-    return data.users.find(u => u.email === email);
+  // Users - stored in Info collection with type='user'
+  getUser: async (email) => {
+    return await Info.findOne({ type: 'user', email });
   },
   
-  getUserById: (id) => {
-    const data = readDB();
-    return data.users.find(u => u.id === id);
+  getUserById: async (id) => {
+    return await Info.findById(id);
   },
   
-  createUser: (name, email, password) => {
-    const data = readDB();
-    const id = data.users.length > 0 ? Math.max(...data.users.map(u => u.id)) + 1 : 1;
-    const user = {
-      id,
+  createUser: async (name, email, password) => {
+    const user = new Info({
+      type: 'user',
       name,
       email,
       password,
-      created_at: new Date().toISOString()
-    };
-    data.users.push(user);
-    writeDB(data);
-    return user;
+      created_at: new Date()
+    });
+    return await user.save();
   },
   
-  getAllUsers: () => {
-    const data = readDB();
-    return data.users.map(u => ({
-      id: u.id,
+  getAllUsers: async () => {
+    const users = await Info.find({ type: 'user' }).select('name email created_at').sort({ created_at: -1 });
+    return users.map(u => ({
+      id: u._id.toString(),
       name: u.name,
       email: u.email,
       created_at: u.created_at
@@ -87,135 +50,111 @@ const db = {
   },
   
   // Labs
-  getLab: (labNumber) => {
-    const data = readDB();
-    return data.labs.find(l => l.lab_number === labNumber);
+  getLab: async (labNumber) => {
+    return await Lab.findOne({ lab_number: labNumber });
   },
   
-  getAllLabs: () => {
-    const data = readDB();
-    return data.labs.sort((a, b) => a.lab_number - b.lab_number);
+  getAllLabs: async () => {
+    return await Lab.find().sort({ lab_number: 1 });
   },
   
-  createLab: (labNumber, name, description) => {
-    const data = readDB();
-    const id = data.labs.length > 0 ? Math.max(...data.labs.map(l => l.id)) + 1 : 1;
-    const lab = {
-      id,
+  createLab: async (labNumber, name, description) => {
+    const lab = new Lab({
       lab_number: labNumber,
       name,
       description: description || '',
-      created_at: new Date().toISOString()
-    };
-    data.labs.push(lab);
-    writeDB(data);
-    return lab;
+      created_at: new Date()
+    });
+    return await lab.save();
   },
   
-  updateLab: (labNumber, updates) => {
-    const data = readDB();
-    const lab = data.labs.find(l => l.lab_number === labNumber);
+  updateLab: async (labNumber, updates) => {
+    return await Lab.findOneAndUpdate(
+      { lab_number: labNumber },
+      { $set: updates },
+      { new: true }
+    );
+  },
+  
+  deleteLab: async (labNumber) => {
+    const lab = await Lab.findOne({ lab_number: labNumber });
     if (lab) {
-      Object.assign(lab, updates);
-      writeDB(data);
-      return lab;
-    }
-    return null;
-  },
-  
-  deleteLab: (labNumber) => {
-    const data = readDB();
-    const index = data.labs.findIndex(l => l.lab_number === labNumber);
-    if (index !== -1) {
-      const lab = data.labs[index];
       // Delete associated devices
-      data.devices = data.devices.filter(d => d.lab_id !== lab.id);
-      data.labs.splice(index, 1);
-      writeDB(data);
+      await Device.deleteMany({ lab_id: lab._id });
+      await Lab.deleteOne({ _id: lab._id });
       return true;
     }
     return false;
   },
   
   // Devices
-  getDevicesByLab: (labId) => {
-    const data = readDB();
-    return data.devices.filter(d => d.lab_id === labId);
+  getDevicesByLab: async (labId) => {
+    return await Device.find({ lab_id: labId }).sort({ type: 1, name: 1 });
   },
   
-  getDevice: (deviceId) => {
-    const data = readDB();
-    return data.devices.find(d => d.id === deviceId);
+  getDevice: async (deviceId) => {
+    return await Device.findById(deviceId);
   },
   
-  createDevice: (labId, name, type, isOn = true) => {
-    const data = readDB();
-    const id = data.devices.length > 0 ? Math.max(...data.devices.map(d => d.id)) + 1 : 1;
-    const device = {
-      id,
+  createDevice: async (labId, name, type, isOn = true) => {
+    const device = new Device({
       lab_id: labId,
       name,
       type,
       is_on: isOn ? 1 : 0,
-      created_at: new Date().toISOString()
-    };
-    data.devices.push(device);
-    writeDB(data);
-    return device;
+      created_at: new Date()
+    });
+    return await device.save();
   },
   
-  updateDevice: (deviceId, updates) => {
-    const data = readDB();
-    const device = data.devices.find(d => d.id === deviceId);
-    if (device) {
-      Object.assign(device, updates);
-      writeDB(data);
-      return device;
-    }
-    return null;
+  updateDevice: async (deviceId, updates) => {
+    return await Device.findByIdAndUpdate(
+      deviceId,
+      { $set: updates },
+      { new: true }
+    );
   },
   
-  deleteDevice: (deviceId) => {
-    const data = readDB();
-    const index = data.devices.findIndex(d => d.id === deviceId);
-    if (index !== -1) {
-      data.devices.splice(index, 1);
-      writeDB(data);
-      return true;
-    }
-    return false;
+  deleteDevice: async (deviceId) => {
+    const result = await Device.deleteOne({ _id: deviceId });
+    return result.deletedCount > 0;
   }
 };
 
-// Initialize database and create default data
-initDB();
-const data = readDB();
+// Initialize default data
+const initializeData = async () => {
+  try {
+    // Create default admin if doesn't exist
+    const adminExists = await db.getAdmin('admin');
+    if (!adminExists) {
+      const bcrypt = require('bcryptjs');
+      const hashedPassword = bcrypt.hashSync('admin123', 10);
+      await db.createAdmin('admin', hashedPassword);
+      console.log('Default admin created: admin / admin123');
+    }
 
-// Create default admin if doesn't exist
-if (data.admins.length === 0) {
-  const bcrypt = require('bcryptjs');
-  const hashedPassword = bcrypt.hashSync('admin123', 10);
-  db.createAdmin('admin', hashedPassword);
-  console.log('Default admin created: admin / admin123');
-}
-
-// Create labs 1-10 if they don't exist
-for (let i = 1; i <= 10; i++) {
-  if (!db.getLab(i)) {
-    const lab = db.createLab(i, `Lab ${i}`, `Digital Electronics Laboratory ${i}`);
-    
-    // Create devices for each lab
-    for (let j = 1; j <= 8; j++) {
-      db.createDevice(lab.id, `Light ${j}`, 'light', true);
+    // Create labs 1-10 if they don't exist
+    for (let i = 1; i <= 10; i++) {
+      const lab = await db.getLab(i);
+      if (!lab) {
+        const newLab = await db.createLab(i, `Lab ${i}`, `Digital Electronics Laboratory ${i}`);
+        
+        // Create devices for each lab
+        for (let j = 1; j <= 8; j++) {
+          await db.createDevice(newLab._id, `Light ${j}`, 'light', true);
+        }
+        for (let j = 1; j <= 3; j++) {
+          await db.createDevice(newLab._id, `Fan ${j}`, 'fan', true);
+        }
+        for (let j = 1; j <= 8; j++) {
+          await db.createDevice(newLab._id, `PC ${j}`, 'computer', true);
+        }
+      }
     }
-    for (let j = 1; j <= 3; j++) {
-      db.createDevice(lab.id, `Fan ${j}`, 'fan', true);
-    }
-    for (let j = 1; j <= 8; j++) {
-      db.createDevice(lab.id, `PC ${j}`, 'computer', true);
-    }
+    console.log('📊 Database initialized with labs and devices');
+  } catch (error) {
+    console.error('Error initializing data:', error);
   }
-}
+};
 
-module.exports = db;
-
+module.exports = { db, initializeData };

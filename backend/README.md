@@ -1,6 +1,6 @@
 # Digital Electronics System - Backend API
 
-A RESTful API backend for the Digital Electronics System built with Express.js and SQLite.
+A RESTful API backend for the Digital Electronics System built with Express.js and MongoDB.
 
 ## Features
 
@@ -8,6 +8,12 @@ A RESTful API backend for the Digital Electronics System built with Express.js a
 - **Lab Management**: CRUD operations for laboratories
 - **Device Management**: Manage devices (lights, fans, computers) within labs
 - **Device Control**: Toggle device states (ON/OFF)
+- **MongoDB Integration**: All data stored in MongoDB database "CPI"
+
+## Prerequisites
+
+- Node.js installed
+- MongoDB installed and running (or MongoDB Atlas account)
 
 ## Setup
 
@@ -16,7 +22,16 @@ A RESTful API backend for the Digital Electronics System built with Express.js a
 npm install
 ```
 
-2. Start the server:
+2. Make sure MongoDB is running:
+   - **Local MongoDB**: Start MongoDB service on your machine
+   - **MongoDB Atlas**: Update `MONGODB_URI` in `.env` file
+
+3. Configure MongoDB connection (optional):
+   - Create `.env` file in backend folder
+   - Add: `MONGODB_URI=mongodb://localhost:27017/CPI`
+   - Or use MongoDB Atlas connection string
+
+4. Start the server:
 ```bash
 npm start
 ```
@@ -27,6 +42,22 @@ npm run dev
 ```
 
 The server will run on `http://localhost:5000`
+
+## MongoDB Database Structure
+
+- **Database Name**: `CPI`
+- **Collections**:
+  - `info` - Stores all admin and user login data
+  - `labs` - Stores lab information
+  - `devices` - Stores device information
+
+### Info Collection Schema
+- `type`: 'admin' or 'user'
+- `username`: Admin username (for admins)
+- `email`: User email (for users)
+- `name`: User name (for users)
+- `password`: Hashed password
+- `created_at`: Creation timestamp
 
 ## Default Credentials
 
