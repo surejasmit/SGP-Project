@@ -43,12 +43,14 @@ export default function Navbar({ isAuthenticated, userRole, onLogout }: NavbarPr
                   </DockIcon>
                 </DockItem>
               </Link>
-              <DockItem className="aspect-square rounded-full bg-gradient-to-br from-blue-500 to-cyan-500">
-                <DockLabel>Help</DockLabel>
-                <DockIcon>
-                  <HelpCircle className="h-full w-full text-white" />
-                </DockIcon>
-              </DockItem>
+              <Link href="/help">
+                <DockItem className="aspect-square rounded-full bg-gradient-to-br from-blue-500 to-cyan-500">
+                  <DockLabel>Help</DockLabel>
+                  <DockIcon>
+                    <HelpCircle className="h-full w-full text-white" />
+                  </DockIcon>
+                </DockItem>
+              </Link>
               <DockItem 
                 className="aspect-square rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 cursor-pointer"
                 onClick={toggleTheme}

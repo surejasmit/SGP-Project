@@ -26,15 +26,26 @@ app.use((req, res, next) => {
 
 // MongoDB Connection
 let db;
-const mongoClient = new MongoClient(process.env.MONGODB_URI || 'mongodb://localhost:27017');
+const MONGODB_URI = process.env.MONGODB_URI;
+
+if (!MONGODB_URI) {
+  console.error('❌ MONGODB_URI is not defined in environment variables');
+  process.exit(1);
+}
+
+const mongoClient = new MongoClient(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 async function connectDB() {
   try {
     await mongoClient.connect();
     db = mongoClient.db('SGP');
-    console.log('✅ Connected to MongoDB - Database: SGP');
+    console.log('✅ Connected to MongoDB Atlas - Database: SGP');
+    console.log('🌐 Environment:', process.env.NODE_ENV || 'development');
   } catch (error) {
-    console.error('❌ MongoDB connection error:', error);
+    console.error('❌ MongoDB Atlas connection error:', error.message);
     process.exit(1);
   }
 }

@@ -13,6 +13,7 @@ import LabListPage from './pages/LabListPage';
 import LabDetailPage from './pages/LabDetailPage';
 import ReportIssuePage from './pages/ReportIssuePage';
 import AboutUsPage from './pages/AboutUsPage';
+import HelpPage from './pages/HelpPage';
 import { useAuth } from './hooks/useAuth';
 import { useComplaints } from './hooks/useComplaints';
 import { PCStatusProvider } from './contexts/PCStatusContext';
@@ -31,6 +32,9 @@ function AppContent() {
     }
     if (path === '/about') {
       return <AboutUsPage />;
+    }
+    if (path === '/help') {
+      return <HelpPage />;
     }
     if (path === '/locations') {
       return <LocationsPage />;
