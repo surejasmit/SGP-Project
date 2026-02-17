@@ -161,7 +161,7 @@ const footerLinkGroups: FooterLinkGroup[] = [
 			{ title: 'Careers', href: '#' },
 			{ title: 'Partners', href: '#' },
 			{ title: 'Privacy Policy', href: '#' },
-			{ title: 'Terms of Service', href: '#' },
+			{ title: 'Terms of Service', href: '/terms' },
 			{ title: 'Cookie Policy', href: '#' },
 		],
 	},
