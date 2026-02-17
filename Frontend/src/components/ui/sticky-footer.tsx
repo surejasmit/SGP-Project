@@ -66,6 +66,9 @@ export function StickyFooter({ className, ...props }: StickyFooterProps) {
 							<p>© 2025 Smart Classroom Management. All rights reserved.</p>
 							<p>Powered by SGP</p>
 						</div>
+						<div className="text-gray-400 text-center text-sm mt-2">
+							Contact: <a href="mailto:vrajsutariya2402@gmail.com" className="hover:text-cyan-400 transition-colors">vrajsutariya2402@gmail.com</a> | <a href="tel:+919870040658" className="hover:text-cyan-400 transition-colors">+91 9870040658</a>
+						</div>
 					</div>
 				</div>
 			</div>
