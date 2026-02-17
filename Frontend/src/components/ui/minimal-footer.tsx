@@ -147,6 +147,9 @@ export function MinimalFooter() {
 					<p className="text-gray-300 text-center font-thin">
 						© 2025 Smart Classroom Management. All rights reserved. Powered by SGP
 					</p>
+					<p className="text-gray-400 text-center text-sm">
+						Contact: <a href="mailto:vrajsutariya2402@gmail.com" className="hover:text-cyan-400 transition-colors">vrajsutariya2402@gmail.com</a> | <a href="tel:+919870040658" className="hover:text-cyan-400 transition-colors">+91 9870040658</a>
+					</p>
 				</div>
 			</div>
 		</footer>
