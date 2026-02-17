@@ -94,6 +94,10 @@ export function MinimalFooter() {
 						<p className="text-gray-300 max-w-sm font-mono text-sm text-balance">
 							Innovative system empowering educational institutions with seamless equipment management and issue tracking.
 						</p>
+						<div className="text-gray-300 text-sm space-y-1">
+							<p>📧 Email: smitsureja472007@gmail.com</p>
+							<p>📞 Phone: +91 8160041789</p>
+						</div>
 						<div className="flex gap-2">
 							{socialLinks.map((item, i) => (
 								<a
