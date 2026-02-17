@@ -13,7 +13,7 @@ export function MinimalFooter() {
 	const company = [
 		{
 			title: 'About Us',
-			href: '#',
+			href: '/about',
 		},
 		{
 			title: 'Our Mission',
