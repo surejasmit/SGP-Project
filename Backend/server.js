@@ -244,8 +244,61 @@ app.post('/api/queries/submit', authenticateToken, async (req, res) => {
 // Get All Queries (Admin Only)
 app.get('/api/queries/all', authenticateToken, authorizeAdmin, async (req, res) => {
   try {
+    const { filterType, startDate, endDate, status } = req.query;
+    let dateFilter = {};
+
+    // Build date filter based on filterType
+    if (filterType && filterType !== 'all') {
+      const now = new Date();
+      let start, end;
+
+      switch (filterType) {
+        case 'today':
+          start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+          end = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+          break;
+        case 'week':
+          const weekStart = new Date(now);
+          weekStart.setDate(now.getDate() - now.getDay());
+          weekStart.setHours(0, 0, 0, 0);
+          start = weekStart;
+          end = new Date(weekStart);
+          end.setDate(weekStart.getDate() + 7);
+          break;
+        case 'month':
+          start = new Date(now.getFullYear(), now.getMonth(), 1);
+          end = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+          break;
+        case 'year':
+          start = new Date(now.getFullYear(), 0, 1);
+          end = new Date(now.getFullYear() + 1, 0, 1);
+          break;
+        case 'custom':
+          if (startDate) start = new Date(startDate);
+          if (endDate) {
+            end = new Date(endDate);
+            end.setHours(23, 59, 59, 999);
+          }
+          break;
+      }
+
+      if (start && end) {
+        dateFilter.createdAt = { $gte: start, $lt: end };
+      } else if (start) {
+        dateFilter.createdAt = { $gte: start };
+      } else if (end) {
+        dateFilter.createdAt = { $lt: end };
+      }
+    }
+
+    // Add status filter if provided
+    let queryFilter = { ...dateFilter };
+    if (status && status !== 'all') {
+      queryFilter.status = status;
+    }
+
     const queries = await db.collection('queries')
-      .find({})
+      .find(queryFilter)
       .sort({ createdAt: -1 })
       .toArray();
 
@@ -266,7 +319,8 @@ app.get('/api/queries/all', authenticateToken, authorizeAdmin, async (req, res) 
     res.json({
       total: queries.length,
       queries,
-      groupedQueries: Object.values(groupedQueries)
+      groupedQueries: Object.values(groupedQueries),
+      filters: { filterType, startDate, endDate, status }
     });
   } catch (error) {
     console.error('Get queries error:', error);
@@ -359,16 +413,66 @@ app.get('/api/queries/check', async (req, res) => {
 // Get Dashboard Stats (Admin Only)
 app.get('/api/stats/dashboard', authenticateToken, authorizeAdmin, async (req, res) => {
   try {
-    const totalQueries = await db.collection('queries').countDocuments();
-    const pendingQueries = await db.collection('queries').countDocuments({ status: 'pending' });
-    const resolvedQueries = await db.collection('queries').countDocuments({ status: 'resolved' });
+    const { filterType, startDate, endDate } = req.query;
+    let dateFilter = {};
+
+    // Build date filter for stats
+    if (filterType && filterType !== 'all') {
+      const now = new Date();
+      let start, end;
+
+      switch (filterType) {
+        case 'today':
+          start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+          end = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+          break;
+        case 'week':
+          const weekStart = new Date(now);
+          weekStart.setDate(now.getDate() - now.getDay());
+          weekStart.setHours(0, 0, 0, 0);
+          start = weekStart;
+          end = new Date(weekStart);
+          end.setDate(weekStart.getDate() + 7);
+          break;
+        case 'month':
+          start = new Date(now.getFullYear(), now.getMonth(), 1);
+          end = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+          break;
+        case 'year':
+          start = new Date(now.getFullYear(), 0, 1);
+          end = new Date(now.getFullYear() + 1, 0, 1);
+          break;
+        case 'custom':
+          if (startDate) start = new Date(startDate);
+          if (endDate) {
+            end = new Date(endDate);
+            end.setHours(23, 59, 59, 999);
+          }
+          break;
+      }
+
+      if (start && end) {
+        dateFilter.createdAt = { $gte: start, $lt: end };
+      } else if (start) {
+        dateFilter.createdAt = { $gte: start };
+      } else if (end) {
+        dateFilter.createdAt = { $lt: end };
+      }
+    }
+
+    const totalQueries = await db.collection('queries').countDocuments(dateFilter);
+    const pendingQueries = await db.collection('queries').countDocuments({ ...dateFilter, status: 'pending' });
+    const resolvedQueries = await db.collection('queries').countDocuments({ ...dateFilter, status: 'resolved' });
+    const inProgressQueries = await db.collection('queries').countDocuments({ ...dateFilter, status: 'in-progress' });
     const totalUsers = await db.collection('info').countDocuments({ role: 'user' });
 
     res.json({
       totalQueries,
       pendingQueries,
       resolvedQueries,
-      totalUsers
+      inProgressQueries,
+      totalUsers,
+      filters: { filterType, startDate, endDate }
     });
   } catch (error) {
     console.error('Stats error:', error);
@@ -393,7 +497,7 @@ app.get('/', (req, res) => {
       queries: {
         submit: 'POST /api/queries/submit',
         myQueries: 'GET /api/queries/my-queries',
-        all: 'GET /api/queries/all (admin)',
+        all: 'GET /api/queries/all (admin) - supports ?filterType=today|week|month|year|custom&startDate=YYYY-MM-DD&endDate=YYYY-MM-DD&status=pending|in-progress|resolved',
         updateStatus: 'PATCH /api/queries/:id/status (admin)'
       },
       stats: {

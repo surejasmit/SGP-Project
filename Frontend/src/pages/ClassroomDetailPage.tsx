@@ -79,23 +79,23 @@ export default function ClassroomDetailPage() {
   };
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+    <div className="bg-gray-50 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black">
       <div className="h-[200px] flex flex-col items-center justify-center pt-20">
         <div className="flex justify-between items-center w-full max-w-7xl px-4">
           <div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-200 to-gray-400 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">
               Classroom {roomNumber}
             </h1>
             <div className="flex gap-6 mt-4">
-              <p className="text-green-400">✓ Working: {workingCount}</p>
-              <p className="text-red-400">✗ Affected: {affectedCount}</p>
+              <p className="text-green-600 dark:text-green-400">✓ Working: {workingCount}</p>
+              <p className="text-red-600 dark:text-red-400">✗ Affected: {affectedCount}</p>
             </div>
           </div>
-          <Link href="/classrooms" className="px-4 py-2 text-gray-300 hover:text-white">
+          <Link href="/classrooms" className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
             ← Back
           </Link>
         </div>
-        <div className="animate-bounce text-gray-400 text-xs mt-8">↓ Scroll</div>
+        <div className="animate-bounce text-gray-500 dark:text-gray-400 text-xs mt-8">↓ Scroll</div>
       </div>
 
       <RadialScrollGallery
@@ -117,7 +117,7 @@ export default function ClassroomDetailPage() {
                   border-2 shadow-lg transition-all duration-700
                   ${item.status === 'affected'
                     ? 'bg-red-600 border-red-800'
-                    : 'bg-gray-800/50 border-gray-600'
+                    : 'bg-white dark:bg-gray-800/50 border-gray-200 dark:border-gray-600'
                   }
                 `}
               >
@@ -138,10 +138,14 @@ export default function ClassroomDetailPage() {
                   </div>
 
                   <div className={`transition-transform duration-500 ${isActive ? 'translate-y-0' : 'translate-y-2'}`}>
-                    <h3 className="text-xl font-bold leading-tight text-white text-center">
+                    <h3 className={`text-xl font-bold leading-tight text-center ${
+                      item.status === 'affected' ? 'text-white' : 'text-gray-900 dark:text-white'
+                    }`}>
                       {item.type} {item.id}
                     </h3>
-                    <p className="text-gray-400 text-xs text-center mt-2">Click to report issue</p>
+                    <p className={`text-xs text-center mt-2 ${
+                      item.status === 'affected' ? 'text-gray-200' : 'text-gray-600 dark:text-gray-400'
+                    }`}>Click to report issue</p>
                     <div className={`h-0.5 bg-gray-400 mt-2 mx-auto transition-all duration-500 ${isActive ? 'w-full opacity-100' : 'w-0 opacity-0'}`} />
                   </div>
                 </div>
@@ -151,8 +155,8 @@ export default function ClassroomDetailPage() {
         }
       </RadialScrollGallery>
 
-      <div className="h-[200px] flex items-center justify-center bg-gray-900/50">
-        <p className="text-gray-400 text-sm">Scroll back up to continue</p>
+      <div className="h-[200px] flex items-center justify-center bg-gray-100 dark:bg-gray-900/50">
+        <p className="text-gray-600 dark:text-gray-400 text-sm">Scroll back up to continue</p>
       </div>
     </div>
   );
