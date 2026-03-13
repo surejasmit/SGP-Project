@@ -1,8 +1,18 @@
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcryptjs');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 async function createAdmin() {
-  const client = new MongoClient('mongodb://localhost:27017');
+  const MONGODB_URI = process.env.MONGODB_URI;
+  
+  if (!MONGODB_URI) {
+    console.error('❌ MONGODB_URI is not defined in environment variables');
+    process.exit(1);
+  }
+  
+  const client = new MongoClient(MONGODB_URI);
   
   try {
     await client.connect();
@@ -14,6 +24,7 @@ async function createAdmin() {
     if (existingAdmin) {
       console.log('❌ Admin user already exists!');
       console.log('Email: admin@sgp.com');
+      console.log('Password: admin123');
       return;
     }
     

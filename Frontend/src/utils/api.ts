@@ -51,8 +51,20 @@ export const api = {
   },
 
   // Get all queries (admin only)
-  async getAllQueries() {
-    return this.request('/queries/all');
+  async getAllQueries(filters?: {
+    filterType?: string;
+    startDate?: string;
+    endDate?: string;
+    status?: string;
+  }) {
+    const params = new URLSearchParams();
+    if (filters) {
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value) params.append(key, value);
+      });
+    }
+    const queryString = params.toString();
+    return this.request(`/queries/all${queryString ? `?${queryString}` : ''}`);
   },
 
   // Update query status (admin only)
@@ -75,7 +87,18 @@ export const api = {
   },
 
   // Get dashboard stats (admin only)
-  async getDashboardStats() {
-    return this.request('/stats/dashboard');
+  async getDashboardStats(filters?: {
+    filterType?: string;
+    startDate?: string;
+    endDate?: string;
+  }) {
+    const params = new URLSearchParams();
+    if (filters) {
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value) params.append(key, value);
+      });
+    }
+    const queryString = params.toString();
+    return this.request(`/stats/dashboard${queryString ? `?${queryString}` : ''}`);
   },
 };

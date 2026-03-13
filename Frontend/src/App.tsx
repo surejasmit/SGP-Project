@@ -17,6 +17,7 @@ import HelpPage from './pages/HelpPage';
 import { useAuth } from './hooks/useAuth';
 import { useComplaints } from './hooks/useComplaints';
 import { PCStatusProvider } from './contexts/PCStatusContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 function AppContent() {
   const { path } = useRouter();
@@ -81,10 +82,12 @@ function AppContent() {
 
 export default function App() {
   return (
-    <Router>
-      <PCStatusProvider>
-        <AppContent />
-      </PCStatusProvider>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <PCStatusProvider>
+          <AppContent />
+        </PCStatusProvider>
+      </Router>
+    </ThemeProvider>
   );
 }
