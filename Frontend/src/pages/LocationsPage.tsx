@@ -1,51 +1,66 @@
 import { Link } from '../components/Router';
 import { motion } from 'framer-motion';
-import { LampContainer } from '@/components/ui/lamp';
 
 export default function LocationsPage() {
   return (
-    <div className="bg-gray-50 dark:bg-black">
-      <LampContainer>
+    <div className="min-h-screen bg-background text-foreground pt-20 px-4 pb-8">
+      <div className="max-w-5xl mx-auto">
         <motion.h1
-          initial={{ opacity: 0.5, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: "easeInOut",
-          }}
-          className="mt-8 bg-gradient-to-br from-gray-800 to-gray-600 dark:from-white dark:to-gray-300 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-5xl md:text-7xl font-extrabold text-center mt-16 mb-4 text-foreground"
         >
           Select Location Type
         </motion.h1>
-        
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+          className="text-foreground/60 text-center mb-16 text-lg"
+        >
+          Choose where you want to report an equipment issue
+        </motion.p>
+
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.5,
-            duration: 0.8,
-            ease: "easeInOut",
-          }}
-          className="flex flex-col md:flex-row gap-8 mt-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="flex flex-col md:flex-row gap-8 justify-center"
         >
           <Link href="/classrooms">
-            <div className="group relative bg-white dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-700 hover:bg-gray-50 dark:hover:from-gray-800 dark:hover:to-gray-600 rounded-2xl p-12 cursor-pointer transition-all duration-300 border-2 border-gray-200 dark:border-gray-500 hover:border-gray-300 dark:hover:border-gray-400 hover:scale-105 shadow-lg">
-              <div className="text-6xl mb-4 text-center">🏫</div>
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white text-center mb-2">Classrooms</h2>
-              <p className="text-gray-600 dark:text-gray-200 text-center">20 Classrooms (301-320)</p>
-            </div>
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.2 }}
+              className="relative bg-background rounded-2xl p-12 cursor-pointer border border-foreground/10 hover:border-foreground/30 transition-colors"
+            >
+              <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-20 h-20 bg-yellow-400/90 rounded-full flex items-center justify-center text-4xl">
+                🏫
+              </div>
+              <div className="pt-8">
+                <h2 className="text-3xl font-bold text-foreground text-center mb-2">Classrooms</h2>
+                <p className="text-foreground/60 text-center">20 Classrooms (301-320)</p>
+              </div>
+            </motion.div>
           </Link>
           
           <Link href="/labs">
-            <div className="group relative bg-white dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-700 hover:bg-gray-50 dark:hover:from-gray-800 dark:hover:to-gray-600 rounded-2xl p-12 cursor-pointer transition-all duration-300 border-2 border-gray-200 dark:border-gray-500 hover:border-gray-300 dark:hover:border-gray-400 hover:scale-105 shadow-lg">
-              <div className="text-6xl mb-4 text-center">🔬</div>
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white text-center mb-2">Labs</h2>
-              <p className="text-gray-600 dark:text-gray-200 text-center">15 Labs Available</p>
-            </div>
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.2 }}
+              className="relative bg-background rounded-2xl p-12 cursor-pointer border border-foreground/10 hover:border-foreground/30 transition-colors"
+            >
+              <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-20 h-20 bg-yellow-400/90 rounded-full flex items-center justify-center text-4xl">
+                🔬
+              </div>
+              <div className="pt-8">
+                <h2 className="text-3xl font-bold text-foreground text-center mb-2">Labs</h2>
+                <p className="text-foreground/60 text-center">15 Labs Available</p>
+              </div>
+            </motion.div>
           </Link>
         </motion.div>
-      </LampContainer>
+      </div>
     </div>
   );
 }

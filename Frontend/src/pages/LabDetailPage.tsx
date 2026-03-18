@@ -8,7 +8,7 @@ import { api } from '../utils/api';
 export default function LabDetailPage() {
   const { path, navigate } = useRouter();
   const labNumber = path.split('/')[2] || '1';
-  const { markAsAffected, getPCStatus } = usePCStatus();
+  const _pcStatus = usePCStatus();
   const [affectedItems, setAffectedItems] = useState<Set<string>>(new Set());
   
   useEffect(() => {
@@ -103,23 +103,23 @@ export default function LabDetailPage() {
   };
 
   return (
-    <div className="bg-gray-50 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black">
+    <div className="bg-background text-foreground">
       <div className="h-[200px] flex flex-col items-center justify-center pt-20">
         <div className="flex justify-between items-center w-full max-w-7xl px-4">
           <div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold text-foreground">
               Lab {labNumber}
             </h1>
             <div className="flex gap-6 mt-4">
-              <p className="text-green-600 dark:text-green-400">✓ Working: {workingCount}</p>
-              <p className="text-red-600 dark:text-red-400">✗ Affected: {affectedCount}</p>
+              <p className="text-foreground/70">✓ Working: {workingCount}</p>
+              <p className="text-foreground/50">✗ Affected: {affectedCount}</p>
             </div>
           </div>
-          <Link href="/labs" className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+          <Link href="/labs" className="text-sm font-medium tracking-widest text-foreground/60 hover:text-foreground transition-colors">
             ← Back
           </Link>
         </div>
-        <div className="animate-bounce text-gray-500 dark:text-gray-400 text-xs mt-8">↓ Scroll</div>
+        <div className="animate-bounce text-foreground/40 text-xs mt-8">↓ Scroll</div>
       </div>
 
       <RadialScrollGallery
@@ -141,7 +141,7 @@ export default function LabDetailPage() {
                   border-2 shadow-lg transition-all duration-700
                   ${item.status === 'affected'
                     ? 'bg-red-600 border-red-800'
-                    : 'bg-white dark:bg-gray-800/50 border-gray-200 dark:border-gray-600'
+                    : 'bg-background border-foreground/10'
                   }
                 `}
               >
@@ -163,12 +163,12 @@ export default function LabDetailPage() {
 
                   <div className={`transition-transform duration-500 ${isActive ? 'translate-y-0' : 'translate-y-2'}`}>
                     <h3 className={`text-xl font-bold leading-tight text-center ${
-                      item.status === 'affected' ? 'text-white' : 'text-gray-900 dark:text-white'
+                      item.status === 'affected' ? 'text-white' : 'text-foreground'
                     }`}>
                       {item.type} {item.id}
                     </h3>
                     <p className={`text-xs text-center mt-2 ${
-                      item.status === 'affected' ? 'text-gray-200' : 'text-gray-600 dark:text-gray-400'
+                      item.status === 'affected' ? 'text-gray-200' : 'text-foreground/60'
                     }`}>Click to report issue</p>
                     <div className={`h-0.5 bg-gray-400 mt-2 mx-auto transition-all duration-500 ${isActive ? 'w-full opacity-100' : 'w-0 opacity-0'}`} />
                   </div>
@@ -179,8 +179,8 @@ export default function LabDetailPage() {
         }
       </RadialScrollGallery>
 
-      <div className="h-[200px] flex items-center justify-center bg-gray-100 dark:bg-gray-900/50">
-        <p className="text-gray-600 dark:text-gray-400 text-sm">Scroll back up to continue</p>
+      <div className="h-[200px] flex items-center justify-center bg-background border-t border-foreground/10">
+        <p className="text-foreground/40 text-sm">Scroll back up to continue</p>
       </div>
     </div>
   );

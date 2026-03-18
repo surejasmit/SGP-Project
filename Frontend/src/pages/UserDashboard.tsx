@@ -53,16 +53,16 @@ export default function UserDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black pt-20 flex items-center justify-center">
-        <p className="text-gray-900 dark:text-white text-xl">Loading...</p>
+      <div className="min-h-screen bg-background text-foreground pt-20 flex items-center justify-center">
+        <p className="text-foreground text-xl">Loading...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-black pt-20 px-4 pb-8">
+    <div className="min-h-screen bg-background text-foreground pt-20 px-4 pb-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-200 dark:to-gray-400 bg-clip-text text-transparent mb-8">
+        <h1 className="text-4xl font-bold text-foreground mb-8">
           <Typewriter 
             text={["My Queries", "Track Your Reports", "View Status Updates"]}
             speed={80}
@@ -72,46 +72,46 @@ export default function UserDashboard() {
           />
         </h1>
 
-        <div className="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-sm">
+        <div className="bg-background border border-foreground/10 rounded-xl overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-100 dark:bg-gray-900/50">
+              <thead className="border-b border-foreground/10">
                 <tr>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-600 dark:text-gray-400 uppercase">Location</th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-600 dark:text-gray-400 uppercase">Item</th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-600 dark:text-gray-400 uppercase">Query</th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-600 dark:text-gray-400 uppercase">Submitted</th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-600 dark:text-gray-400 uppercase">Status</th>
-                  <th className="px-6 py-4 text-left text-xs font-medium text-gray-600 dark:text-gray-400 uppercase">Admin Response</th>
+                  <th className="px-6 py-4 text-left text-xs font-medium tracking-widest text-foreground/60 uppercase">Location</th>
+                  <th className="px-6 py-4 text-left text-xs font-medium tracking-widest text-foreground/60 uppercase">Item</th>
+                  <th className="px-6 py-4 text-left text-xs font-medium tracking-widest text-foreground/60 uppercase">Query</th>
+                  <th className="px-6 py-4 text-left text-xs font-medium tracking-widest text-foreground/60 uppercase">Submitted</th>
+                  <th className="px-6 py-4 text-left text-xs font-medium tracking-widest text-foreground/60 uppercase">Status</th>
+                  <th className="px-6 py-4 text-left text-xs font-medium tracking-widest text-foreground/60 uppercase">Admin Response</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+              <tbody className="divide-y divide-foreground/5">
                 {queries.map((query) => (
-                  <tr key={query._id} className="hover:bg-gray-50 dark:hover:bg-gray-700/30">
-                    <td className="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">
+                  <tr key={query._id} className="hover:bg-foreground/[0.03]">
+                    <td className="px-6 py-4 text-sm text-foreground/80">
                       {getLocationDisplay(query.locationType, query.locationId)}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">
+                    <td className="px-6 py-4 text-sm text-foreground/80">
                       {query.itemType} {query.itemNumber}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-700 dark:text-gray-300 max-w-md">{query.query}</td>
-                    <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{formatDateTime(query.createdAt)}</td>
+                    <td className="px-6 py-4 text-sm text-foreground/80 max-w-md">{query.query}</td>
+                    <td className="px-6 py-4 text-sm text-foreground/60">{formatDateTime(query.createdAt)}</td>
                     <td className="px-6 py-4">
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        query.status === 'resolved' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' :
-                        query.status === 'in-progress' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400' :
-                        'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium border ${
+                        query.status === 'resolved' ? 'border-foreground/20 text-foreground/70' :
+                        query.status === 'in-progress' ? 'border-yellow-500/30 text-yellow-600 dark:text-yellow-400' :
+                        'border-foreground/20 text-foreground/60'
                       }`}>
                         {query.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">
+                    <td className="px-6 py-4 text-sm text-foreground/80">
                       {query.adminResponse ? (
-                        <div className="bg-gray-100 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded p-2">
+                        <div className="bg-foreground/5 border border-foreground/10 rounded p-2">
                           {query.adminResponse}
                         </div>
                       ) : (
-                        <span className="text-gray-500 italic">No response yet</span>
+                        <span className="text-foreground/40 italic">No response yet</span>
                       )}
                     </td>
                   </tr>
@@ -121,7 +121,7 @@ export default function UserDashboard() {
           </div>
 
           {queries.length === 0 && (
-            <div className="text-center py-12 text-gray-500 dark:text-gray-400">
+            <div className="text-center py-12 text-foreground/40">
               You haven't submitted any queries yet
             </div>
           )}

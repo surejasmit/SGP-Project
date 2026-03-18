@@ -48,6 +48,5 @@ async function testConnection() {
     await client.close();
   }
 }
-
 testConnection();
 
