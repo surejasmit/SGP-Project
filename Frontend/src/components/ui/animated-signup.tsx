@@ -8,7 +8,6 @@ import {
   Sun,
   Moon,
 } from "lucide-react";
-import { StarButton } from "@/components/ui/star-button";
 import { motion } from "framer-motion";
 import { Link } from '../Router';
 
@@ -261,14 +260,13 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSignup }) => {
             )}
           </div>
 
-          <StarButton
+          <button
             type="submit"
-            className="w-full py-3"
-            lightColor={isDarkMode ? "#FAFAFA" : "#3b82f6"}
+            className="w-full py-3 rounded-full border border-foreground/20 bg-foreground text-background font-medium hover:bg-foreground/90 transition-all disabled:opacity-50"
             disabled={!name || !email || !password || !isEmailValid || !passwordMatch}
           >
             Sign Up
-          </StarButton>
+          </button>
         </form>
 
         <div className="relative my-6">
