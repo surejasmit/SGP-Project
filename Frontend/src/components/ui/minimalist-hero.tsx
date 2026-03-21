@@ -6,7 +6,6 @@ import { IsometricClassroom } from './isometric-classroom';
 // Define the props interface for type safety and reusability
 interface MinimalistHeroProps {
   mainText: string;
-  readMoreLink: string;
   overlayText: {
     part1: string;
     part2: string;
@@ -28,7 +27,6 @@ const SocialIcon = ({ href, icon: Icon }: { href: string; icon: LucideIcon }) =>
 // The main reusable Hero Section component (no image variant)
 export const MinimalistHero = ({
   mainText,
-  readMoreLink,
   overlayText,
   socialLinks,
   locationText,
@@ -57,9 +55,6 @@ export const MinimalistHero = ({
             className="text-center md:text-left"
           >
             <p className="mx-auto max-w-xs text-sm leading-relaxed text-foreground/80 md:mx-0">{mainText}</p>
-            <a href={readMoreLink} className="mt-4 inline-block text-sm font-medium text-foreground underline decoration-from-font">
-              Read More
-            </a>
           </motion.div>
 
           {/* Right Text */}

@@ -17,7 +17,6 @@ export default function LandingPage() {
     <div className="bg-background text-foreground">
       <MinimalistHero
         mainText=""
-        readMoreLink="#/about"
         overlayText={{
           part1: 'Smart',
           part2: 'Classroom.',
