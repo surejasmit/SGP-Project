@@ -2,27 +2,17 @@ import { MinimalistHero } from '@/components/ui/minimalist-hero';
 import { MinimalFooter } from '@/components/ui/minimal-footer';
 import { Link } from '../components/Router';
 import { Typewriter } from '@/components/ui/typewriter-text';
-import { Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function LandingPage() {
-  const socialLinks = [
-    { icon: Facebook, href: '#' },
-    { icon: Instagram, href: '#' },
-    { icon: Twitter, href: '#' },
-    { icon: Linkedin, href: '#' },
-  ];
-
   return (
     <div className="bg-background text-foreground">
       <MinimalistHero
         mainText=""
-        readMoreLink="#/about"
         overlayText={{
           part1: 'Smart',
           part2: 'Classroom.',
         }}
-        socialLinks={socialLinks}
         locationText="Smart Classroom Management"
       />
       
