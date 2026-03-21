@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import type { LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { IsometricClassroom } from './isometric-classroom';
 
@@ -10,25 +9,16 @@ interface MinimalistHeroProps {
     part1: string;
     part2: string;
   };
-  socialLinks: { icon: LucideIcon; href: string }[];
   locationText: string;
   className?: string;
 }
 
 
 
-// Helper component for social media icons
-const SocialIcon = ({ href, icon: Icon }: { href: string; icon: LucideIcon }) => (
-  <a href={href} target="_blank" rel="noopener noreferrer" className="text-foreground/60 transition-colors hover:text-foreground">
-    <Icon className="h-5 w-5" />
-  </a>
-);
-
 // The main reusable Hero Section component (no image variant)
 export const MinimalistHero = ({
   mainText,
   overlayText,
-  socialLinks,
   locationText,
   className,
 }: MinimalistHeroProps) => {
@@ -74,17 +64,7 @@ export const MinimalistHero = ({
       </div>
 
       {/* Footer Elements */}
-      <footer className="z-30 flex w-full max-w-7xl items-center justify-between">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.2 }}
-          className="flex items-center space-x-4"
-        >
-          {socialLinks.map((link, index) => (
-            <SocialIcon key={index} href={link.href} icon={link.icon} />
-          ))}
-        </motion.div>
+      <footer className="z-30 flex w-full max-w-7xl items-center justify-end">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
