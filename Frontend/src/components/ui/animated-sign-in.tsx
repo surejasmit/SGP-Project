@@ -2,34 +2,30 @@ import React, { useState, useEffect } from "react";
 import {
   Eye,
   EyeOff,
-  Github,
-  Twitter,
-  Linkedin,
   Sun,
   Moon,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { GoogleLogin } from '@react-oauth/google';
 
 import { Link } from '../Router';
 
 interface LoginPageProps {
   onLogin?: (email: string, password: string, rememberMe: boolean) => void;
+  onGoogleLogin?: (credential: string) => void;
 }
 
-const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
+const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onGoogleLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isEmailFocused, setIsEmailFocused] = useState(false);
-  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(true);
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   const validateEmail = (email: string) => {
     const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
   };
 
@@ -44,7 +40,6 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsFormSubmitted(true);
 
     if (email && password && validateEmail(email)) {
       if (onLogin) {
@@ -148,18 +143,10 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
   return (
     <div className={`relative min-h-screen flex items-center justify-center overflow-hidden ${isDarkMode ? "bg-gray-900" : "bg-gradient-to-br from-blue-50 to-indigo-100"}`}>
-      <style jsx>{`
-        .particles-canvas {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          pointer-events: none;
-        }
-      `}</style>
-      
-      <canvas id="particles" className="particles-canvas"></canvas>
+      <canvas
+        id="particles"
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
+      ></canvas>
 
       <button
         onClick={toggleDarkMode}
@@ -169,22 +156,16 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
       </button>
 
       {/* Animated gradient background behind login box */}
-      <div className="absolute z-0 w-full max-w-md h-[600px] animate-gradient-bg">
-        <style jsx>{`
-          @keyframes gradient-bg {
-            0% { background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899); }
-            25% { background: linear-gradient(90deg, #8b5cf6, #ec4899, #3b82f6); }
-            50% { background: linear-gradient(135deg, #ec4899, #3b82f6, #8b5cf6); }
-            75% { background: linear-gradient(180deg, #3b82f6, #8b5cf6, #ec4899); }
-            100% { background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899); }
-          }
-          .animate-gradient-bg {
-            animation: gradient-bg 5s ease-in-out infinite;
-            filter: blur(60px);
-            opacity: 0.6;
-          }
-        `}</style>
-      </div>
+      <div
+        className="absolute z-0 w-full max-w-md"
+        style={{
+          height: '600px',
+          animation: 'gradient-bg-signin 5s ease-in-out infinite',
+          filter: 'blur(60px)',
+          opacity: 0.6,
+          background: 'linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899)',
+        }}
+      ></div>
 
       <motion.div 
         initial={{ opacity: 0, y: 50, scale: 0.9 }}
@@ -204,11 +185,9 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               id="email"
               value={email}
               onChange={handleEmailChange}
-              onFocus={() => setIsEmailFocused(true)}
-              onBlur={() => setIsEmailFocused(false)}
               className={`w-full px-4 py-3 rounded-lg border-2 transition-all ${
                 isDarkMode ? "bg-gray-700 text-white border-gray-600" : "bg-white text-gray-900 border-gray-300"
-              } ${isEmailFocused || email ? "border-blue-500" : ""} ${!isEmailValid && email ? "border-red-500" : ""}`}
+              } ${!isEmailValid && email ? "border-red-500" : "focus:border-blue-500"}`}
               placeholder="Email Address"
               required
             />
@@ -223,11 +202,9 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              onFocus={() => setIsPasswordFocused(true)}
-              onBlur={() => setIsPasswordFocused(false)}
               className={`w-full px-4 py-3 rounded-lg border-2 transition-all ${
                 isDarkMode ? "bg-gray-700 text-white border-gray-600" : "bg-white text-gray-900 border-gray-300"
-              } ${isPasswordFocused || password ? "border-blue-500" : ""}`}
+              } focus:border-blue-500`}
               placeholder="Password"
               required
             />
@@ -259,7 +236,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           <button
             type="submit"
             className="w-full py-3 rounded-full border border-foreground/20 bg-foreground text-background font-medium hover:bg-foreground/90 transition-all disabled:opacity-50"
-            disabled={isFormSubmitted && (!email || !password || !isEmailValid)}
+            disabled={!email || !password || !isEmailValid}
           >
             Sign In
           </button>
@@ -274,16 +251,21 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           </div>
         </div>
 
-        <div className="flex gap-3 justify-center">
-          <button className={`p-3 rounded-lg transition-all hover:scale-110 ${isDarkMode ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-700"}`}>
-            <Github size={18} />
-          </button>
-          <button className={`p-3 rounded-lg transition-all hover:scale-110 ${isDarkMode ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-700"}`}>
-            <Twitter size={18} />
-          </button>
-          <button className={`p-3 rounded-lg transition-all hover:scale-110 ${isDarkMode ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-700"}`}>
-            <Linkedin size={18} />
-          </button>
+        <div className="flex justify-center">
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              if (onGoogleLogin && credentialResponse.credential) {
+                onGoogleLogin(credentialResponse.credential);
+              }
+            }}
+            onError={() => {
+              console.error('Google Login Failed');
+            }}
+            useOneTap
+            theme={isDarkMode ? "filled_black" : "outline"}
+            size="large"
+            width="350"
+          />
         </div>
 
         <p className={`text-center mt-6 text-sm ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
