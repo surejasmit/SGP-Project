@@ -4,16 +4,74 @@ const dotenv = require('dotenv');
 const { MongoClient, ObjectId } = require('mongodb');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { OAuth2Client } = require('google-auth-library');
+const nodemailer = require('nodemailer');
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
+const GOOGLE_CLIENT_ID = process.env.VITE_GOOGLE_CLIENT_ID || process.env.GOOGLE_CLIENT_ID;
+const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
+
+// Email Transporter Setup
+const emailTransporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
+// Send Welcome Email Helper
+async function sendWelcomeEmail(toEmail, userName) {
+  try {
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.log('⚠️ Email not configured. Skipping welcome email.');
+      return;
+    }
+
+    await emailTransporter.sendMail({
+      from: `"Smart Classroom" <${process.env.EMAIL_USER}>`,
+      to: toEmail,
+      subject: '🎉 Welcome to Smart Classroom & Lab Management System!',
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <div style="background: linear-gradient(135deg, #3b82f6, #8b5cf6); padding: 30px; border-radius: 12px 12px 0 0; text-align: center;">
+            <h1 style="color: white; margin: 0; font-size: 24px;">Welcome to Smart Classroom!</h1>
+          </div>
+          <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 12px 12px; border: 1px solid #e5e7eb; border-top: none;">
+            <h2 style="color: #1f2937; margin-top: 0;">Hi ${userName}! 👋</h2>
+            <p style="color: #4b5563; font-size: 16px; line-height: 1.6;">You have successfully signed up for the <strong>Smart Classroom & Lab Electronic Management System</strong>.</p>
+            <p style="color: #4b5563; font-size: 16px; line-height: 1.6;">You can now:</p>
+            <ul style="color: #4b5563; font-size: 16px; line-height: 1.8;">
+              <li>📍 Select a Classroom or Lab</li>
+              <li>🔧 Report equipment issues</li>
+              <li>📊 Track your query status in real-time</li>
+            </ul>
+            <p style="color: #4b5563; font-size: 16px;">Please sign in to get started!</p>
+            <div style="text-align: center; margin-top: 20px;">
+              <p style="color: #9ca3af; font-size: 12px;">This is an automated message. Please do not reply.</p>
+            </div>
+          </div>
+        </div>
+      `,
+    });
+
+    console.log(`✅ Welcome email sent to ${toEmail}`);
+  } catch (error) {
+    console.error('⚠️ Failed to send welcome email:', error.message);
+  }
+}
 
 // Middleware
+const corsOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(',').map(s => s.trim())
+  : ['http://localhost:5173', 'http://localhost:3000'];
+
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  origin: corsOrigins,
   credentials: true
 }));
 app.use(express.json());
@@ -121,6 +179,9 @@ app.post('/api/auth/signup', async (req, res) => {
       { expiresIn: '7d' }
     );
 
+    // Send welcome email (non-blocking)
+    sendWelcomeEmail(email, name);
+
     res.status(201).json({
       message: 'User created successfully',
       token,
@@ -180,6 +241,75 @@ app.post('/api/auth/login', async (req, res) => {
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({ error: 'Server error during login' });
+  }
+});
+
+// Google OAuth Route
+app.post('/api/auth/google', async (req, res) => {
+  try {
+    const { credential } = req.body;
+
+    if (!credential) {
+      return res.status(400).json({ error: 'Google credential is required' });
+    }
+
+    // Verify the Google token
+    const ticket = await googleClient.verifyIdToken({
+      idToken: credential,
+      audience: GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+    if (!payload || !payload.email) {
+      return res.status(400).json({ error: 'Invalid Google token' });
+    }
+
+    const { email, name, sub: googleId } = payload;
+
+    // Check if user already exists
+    let user = await db.collection('info').findOne({ email });
+
+    if (!user) {
+      // Create new user from Google account
+      const result = await db.collection('info').insertOne({
+        name: name || email.split('@')[0],
+        email,
+        googleId,
+        role: 'user',
+        createdAt: new Date(),
+      });
+
+      user = {
+        _id: result.insertedId,
+        name: name || email.split('@')[0],
+        email,
+        role: 'user',
+      };
+
+      // Send welcome email for new Google signups (non-blocking)
+      sendWelcomeEmail(email, name || email.split('@')[0]);
+    }
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { id: user._id, email: user.email, role: user.role },
+      JWT_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    res.json({
+      message: 'Google authentication successful',
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    console.error('Google auth error:', error);
+    res.status(401).json({ error: 'Google authentication failed' });
   }
 });
 
@@ -520,7 +650,7 @@ app.get('/api/health', (req, res) => {
 
 // Start Server
 connectDB().then(() => {
-  app.listen(PORT, () => {
+  app.listen(PORT,'0.0.0.0', () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
   });
 });

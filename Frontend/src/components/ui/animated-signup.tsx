@@ -2,20 +2,19 @@ import React, { useState, useEffect } from "react";
 import {
   Eye,
   EyeOff,
-  Github,
-  Twitter,
-  Linkedin,
   Sun,
   Moon,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { GoogleLogin } from '@react-oauth/google';
 import { Link } from '../Router';
 
 interface SignupPageProps {
   onSignup?: (email: string, password: string, name: string) => void;
+  onGoogleSignup?: (credential: string) => void;
 }
 
-const SignupPage: React.FC<SignupPageProps> = ({ onSignup }) => {
+const SignupPage: React.FC<SignupPageProps> = ({ onSignup, onGoogleSignup }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -145,7 +144,10 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSignup }) => {
 
   return (
     <div className={`relative min-h-screen flex items-center justify-center overflow-hidden ${isDarkMode ? "bg-gray-900" : "bg-gradient-to-br from-blue-50 to-indigo-100"}`}>
-      <canvas id="particles" className="absolute top-0 left-0 w-full h-full pointer-events-none"></canvas>
+      <canvas
+        id="particles"
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
+      ></canvas>
 
       <button
         onClick={toggleDarkMode}
@@ -154,22 +156,16 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSignup }) => {
         {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
       </button>
 
-      <div className="absolute z-0 w-full max-w-md h-[600px] animate-gradient-bg">
-        <style jsx>{`
-          @keyframes gradient-bg {
-            0% { background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899); }
-            25% { background: linear-gradient(90deg, #8b5cf6, #ec4899, #3b82f6); }
-            50% { background: linear-gradient(135deg, #ec4899, #3b82f6, #8b5cf6); }
-            75% { background: linear-gradient(180deg, #3b82f6, #8b5cf6, #ec4899); }
-            100% { background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899); }
-          }
-          .animate-gradient-bg {
-            animation: gradient-bg 5s ease-in-out infinite;
-            filter: blur(60px);
-            opacity: 0.6;
-          }
-        `}</style>
-      </div>
+      <div
+        className="absolute z-0 w-full max-w-md"
+        style={{
+          height: '600px',
+          animation: 'gradient-bg-signup 5s ease-in-out infinite',
+          filter: 'blur(60px)',
+          opacity: 0.6,
+          background: 'linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899)',
+        }}
+      ></div>
 
       <motion.div 
         initial={{ opacity: 0, y: 50, scale: 0.9 }}
@@ -278,16 +274,21 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSignup }) => {
           </div>
         </div>
 
-        <div className="flex gap-3 justify-center">
-          <button className={`p-3 rounded-lg transition-all hover:scale-110 ${isDarkMode ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-700"}`}>
-            <Github size={18} />
-          </button>
-          <button className={`p-3 rounded-lg transition-all hover:scale-110 ${isDarkMode ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-700"}`}>
-            <Twitter size={18} />
-          </button>
-          <button className={`p-3 rounded-lg transition-all hover:scale-110 ${isDarkMode ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-700"}`}>
-            <Linkedin size={18} />
-          </button>
+        <div className="flex justify-center">
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              if (onGoogleSignup && credentialResponse.credential) {
+                onGoogleSignup(credentialResponse.credential);
+              }
+            }}
+            onError={() => {
+              console.error('Google Signup Failed');
+            }}
+            text="signup_with"
+            theme={isDarkMode ? "filled_black" : "outline"}
+            size="large"
+            width="350"
+          />
         </div>
 
         <p className={`text-center mt-6 text-sm ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
