@@ -24,7 +24,12 @@ export function useAuth() {
         body: JSON.stringify({ email, password })
       });
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error('Server returned an invalid response. Please check that the API server is running and accessible.');
+      }
 
       if (!response.ok) {
         throw new Error(data.error || 'Login failed');
@@ -55,7 +60,12 @@ export function useAuth() {
         body: JSON.stringify({ name, email, password, role: 'user' })
       });
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error('Server returned an invalid response. Please check that the API server is running and accessible.');
+      }
 
       if (!response.ok) {
         throw new Error(data.error || `Signup failed with status ${response.status}`);
@@ -74,7 +84,7 @@ export function useAuth() {
       localStorage.setItem('token', data.token);
     } catch (error: any) {
       if (error.message.includes('Failed to fetch')) {
-        throw new Error('Cannot connect to server. Please try again later.');
+        throw new Error('Cannot connect to server. Please check your internet connection or try again later.');
       }
       throw error;
     }
