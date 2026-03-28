@@ -28,17 +28,27 @@ export default function SignupPage({ onSignup }: SignupPageProps) {
         body: JSON.stringify({ credential }),
       });
 
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error('Server returned an invalid response. Please check that the API server is accessible.');
+      }
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Google signup failed');
+        throw new Error(data.error || 'Google signup failed');
       }
 
       // Signup successful — redirect to login page
       alert('Account created successfully! Please sign in.');
       navigate('/login');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Google signup failed:', error);
-      alert('Google signup failed: ' + (error as Error).message);
+      if (error.message.includes('Failed to fetch')) {
+        alert('Cannot connect to server. Please check your internet connection.');
+      } else {
+        alert('Google signup failed: ' + error.message);
+      }
     }
   };
 

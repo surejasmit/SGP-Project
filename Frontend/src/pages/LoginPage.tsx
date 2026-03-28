@@ -39,9 +39,17 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
         body: JSON.stringify({ credential }),
       });
 
-      if (!response.ok) throw new Error('Google login failed');
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error('Server returned an invalid response. Please check that the API server is accessible.');
+      }
 
-      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Google login failed');
+      }
+
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
 
@@ -50,9 +58,13 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
       } else {
         navigate('/locations');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Google login failed:', error);
-      alert('Google login failed: ' + (error as Error).message);
+      if (error.message.includes('Failed to fetch')) {
+        alert('Cannot connect to server. Please check your internet connection.');
+      } else {
+        alert('Google login failed: ' + error.message);
+      }
     }
   };
 
