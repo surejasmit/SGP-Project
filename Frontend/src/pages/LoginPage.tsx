@@ -8,7 +8,7 @@ interface LoginPageProps {
 export default function LoginPage({ onLogin }: LoginPageProps) {
   const { navigate } = useRouter();
 
-  const handleLogin = async (email: string, password: string, rememberMe: boolean) => {
+  const handleLogin = async (email: string, password: string, _rememberMe: boolean) => {
     try {
       await onLogin(email, password);
       

@@ -1,5 +1,5 @@
 import { Link, useRouter } from '../components/Router';
-import { usePCStatus } from '../contexts/PCStatusContext';
+
 import { Badge } from '../components/ui/badge';
 import { RadialScrollGallery } from '../components/ui/portfolio-and-image-gallery';
 import { useState, useEffect } from 'react';
@@ -8,7 +8,7 @@ import { api } from '../utils/api';
 export default function LabDetailPage() {
   const { path, navigate } = useRouter();
   const labNumber = path.split('/')[2] || '1';
-  const _pcStatus = usePCStatus();
+
   const [affectedItems, setAffectedItems] = useState<Set<string>>(new Set());
   
   useEffect(() => {
