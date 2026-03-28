@@ -13,7 +13,7 @@ export default function AboutUsPage() {
         <div className="pointer-events-none fixed left-0 top-20 w-full z-50">
           <div className="absolute left-0 top-0 h-1 w-full bg-foreground/10" />
           <ScrollProgress 
-            containerRef={containerRef} 
+            containerRef={containerRef as any} 
             className="absolute top-0 bg-yellow-400" 
           />
         </div>
