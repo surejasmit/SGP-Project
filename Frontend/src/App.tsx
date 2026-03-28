@@ -23,7 +23,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 function AppContent() {
   const { path } = useRouter();
   const { user, login, signup, logout } = useAuth();
-  const { complaints, addComplaint, updateStatus } = useComplaints();
+  const { addComplaint } = useComplaints();
 
   const renderPage = () => {
     if (path === '/login') {

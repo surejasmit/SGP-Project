@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Complaint, ComplaintStatus } from '../types';
+import type { Complaint, ComplaintStatus } from '../types';
 
 export function useComplaints() {
   const [complaints, setComplaints] = useState<Complaint[]>([]);

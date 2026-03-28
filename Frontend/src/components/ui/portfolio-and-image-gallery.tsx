@@ -5,9 +5,9 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import React, {
   forwardRef,
-  HTMLAttributes,
-  ReactNode,
-  Ref,
+  type HTMLAttributes,
+  type ReactNode,
+  type Ref,
   useEffect,
   useMemo,
   useRef,
@@ -45,7 +45,7 @@ function useResponsiveValue(baseValue: number, mobileValue: number) {
 
     handleResize();
 
-    let timeoutId: NodeJS.Timeout;
+    let timeoutId: ReturnType<typeof setTimeout>;
     const debouncedResize = () => {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(handleResize, 100);
