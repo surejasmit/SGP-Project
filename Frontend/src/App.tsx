@@ -18,7 +18,6 @@ import { useAuth } from './hooks/useAuth';
 import { useComplaints } from './hooks/useComplaints';
 import { PCStatusProvider } from './contexts/PCStatusContext';
 import { ThemeProvider } from './contexts/ThemeContext';
-import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function AppContent() {
   const { path } = useRouter();
@@ -83,14 +82,12 @@ function AppContent() {
 
 export default function App() {
   return (
-    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-      <ThemeProvider>
-        <Router>
-          <PCStatusProvider>
-            <AppContent />
-          </PCStatusProvider>
-        </Router>
-      </ThemeProvider>
-    </GoogleOAuthProvider>
+    <ThemeProvider>
+      <Router>
+        <PCStatusProvider>
+          <AppContent />
+        </PCStatusProvider>
+      </Router>
+    </ThemeProvider>
   );
 }

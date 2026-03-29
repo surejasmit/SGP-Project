@@ -20,37 +20,5 @@ export default function SignupPage({ onSignup }: SignupPageProps) {
     }
   };
 
-  const handleGoogleSignup = async (credential: string) => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/google`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ credential }),
-      });
-
-      let data;
-      try {
-        data = await response.json();
-      } catch {
-        throw new Error('Server returned an invalid response. Please check that the API server is accessible.');
-      }
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Google signup failed');
-      }
-
-      // Signup successful — redirect to login page
-      alert('Account created successfully! Please sign in.');
-      navigate('/login');
-    } catch (error: any) {
-      console.error('Google signup failed:', error);
-      if (error.message.includes('Failed to fetch')) {
-        alert('Cannot connect to server. Please check your internet connection.');
-      } else {
-        alert('Google signup failed: ' + error.message);
-      }
-    }
-  };
-
-  return <AnimatedSignup onSignup={handleSignup} onGoogleSignup={handleGoogleSignup} />;
+  return <AnimatedSignup onSignup={handleSignup} />;
 }

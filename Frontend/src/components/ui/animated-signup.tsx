@@ -6,15 +6,13 @@ import {
   Moon,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { GoogleLogin } from '@react-oauth/google';
 import { Link } from '../Router';
 
 interface SignupPageProps {
   onSignup?: (email: string, password: string, name: string) => void;
-  onGoogleSignup?: (credential: string) => void;
 }
 
-const SignupPage: React.FC<SignupPageProps> = ({ onSignup, onGoogleSignup }) => {
+const SignupPage: React.FC<SignupPageProps> = ({ onSignup }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -264,32 +262,6 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSignup, onGoogleSignup }) => 
             Sign Up
           </button>
         </form>
-
-        <div className="relative my-6">
-          <div className="absolute inset-0 flex items-center">
-            <div className={`w-full border-t ${isDarkMode ? "border-gray-700" : "border-gray-300"}`}></div>
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className={`px-2 ${isDarkMode ? "bg-gray-800 text-gray-400" : "bg-white text-gray-500"}`}>or continue with</span>
-          </div>
-        </div>
-
-        <div className="flex justify-center">
-          <GoogleLogin
-            onSuccess={(credentialResponse) => {
-              if (onGoogleSignup && credentialResponse.credential) {
-                onGoogleSignup(credentialResponse.credential);
-              }
-            }}
-            onError={() => {
-              console.error('Google Signup Failed');
-            }}
-            text="signup_with"
-            theme={isDarkMode ? "filled_black" : "outline"}
-            size="large"
-            width="350"
-          />
-        </div>
 
         <p className={`text-center mt-6 text-sm ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
           Already have an account? <Link href="/login" className="text-blue-600 hover:underline">Sign in</Link>
