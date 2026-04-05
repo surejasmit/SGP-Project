@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - echo Installing dependencies
+      - npm install
+
+  build:
+    commands:
+      - echo Build started
+      - npm run build
+
+  post_build:
+    commands:
+      - echo Uploading to S3
+      - aws s3 sync dist/ s3://server3-0955-bucket --delete

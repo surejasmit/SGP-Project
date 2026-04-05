@@ -4,7 +4,6 @@ const dotenv = require('dotenv');
 const { MongoClient, ObjectId } = require('mongodb');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { OAuth2Client } = require('google-auth-library');
 const nodemailer = require('nodemailer');
 
 dotenv.config();
@@ -12,8 +11,6 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
-const GOOGLE_CLIENT_ID = process.env.VITE_GOOGLE_CLIENT_ID || process.env.GOOGLE_CLIENT_ID;
-const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
 
 // Email Transporter Setup
 const emailTransporter = nodemailer.createTransport({
@@ -241,75 +238,6 @@ app.post('/api/auth/login', async (req, res) => {
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({ error: 'Server error during login' });
-  }
-});
-
-// Google OAuth Route
-app.post('/api/auth/google', async (req, res) => {
-  try {
-    const { credential } = req.body;
-
-    if (!credential) {
-      return res.status(400).json({ error: 'Google credential is required' });
-    }
-
-    // Verify the Google token
-    const ticket = await googleClient.verifyIdToken({
-      idToken: credential,
-      audience: GOOGLE_CLIENT_ID,
-    });
-
-    const payload = ticket.getPayload();
-    if (!payload || !payload.email) {
-      return res.status(400).json({ error: 'Invalid Google token' });
-    }
-
-    const { email, name, sub: googleId } = payload;
-
-    // Check if user already exists
-    let user = await db.collection('info').findOne({ email });
-
-    if (!user) {
-      // Create new user from Google account
-      const result = await db.collection('info').insertOne({
-        name: name || email.split('@')[0],
-        email,
-        googleId,
-        role: 'user',
-        createdAt: new Date(),
-      });
-
-      user = {
-        _id: result.insertedId,
-        name: name || email.split('@')[0],
-        email,
-        role: 'user',
-      };
-
-      // Send welcome email for new Google signups (non-blocking)
-      sendWelcomeEmail(email, name || email.split('@')[0]);
-    }
-
-    // Generate JWT token
-    const token = jwt.sign(
-      { id: user._id, email: user.email, role: user.role },
-      JWT_SECRET,
-      { expiresIn: '7d' }
-    );
-
-    res.json({
-      message: 'Google authentication successful',
-      token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      },
-    });
-  } catch (error) {
-    console.error('Google auth error:', error);
-    res.status(401).json({ error: 'Google authentication failed' });
   }
 });
 
